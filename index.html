@@ -4,105 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>780 Marketing | Full Acquisition Systems That Actually Work</title>
-<meta name="description" content="780 Marketing builds complete client acquisition systems for high-ticket businesses. Meta ads, funnels, CRM automation, tracking, and performance reporting. Based in Calgary, AB.">
+<meta name="description" content="780 Marketing builds complete client acquisition systems for high-ticket businesses. Meta ads, funnels, CRM automation, tracking, and performance reporting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #333; background: #fff; line-height: 1.65; font-size: 17px; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: #444; background: #f7f7f5; line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; letter-spacing: 0.01em; }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
-  :root { --accent: #ae5a5a; --accent-dark: #954d4d; --accent-light: #f5e8e8; --light-grey: #f2f2f0; --dark: #1e1e1e; --text: #444; --text-light: #777; --white: #fff; --border: #e0ddd9; }
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  .section { padding: 72px 0; }
-  @media (max-width: 768px) { .section { padding: 48px 0; } }
-  .btn { display: inline-block; background: var(--accent); color: var(--white); font-size: 16px; font-weight: 700; padding: 16px 40px; border-radius: 10px; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
-  .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  :root {
+    --accent: #ae5a5a;
+    --accent-dark: #954d4d;
+    --accent-glow: rgba(174, 90, 90, 0.15);
+    --dark: #161616;
+    --dark-card: #1e1e1e;
+    --dark-subtle: #2a2a2a;
+    --off-white: #f7f7f5;
+    --white: #ffffff;
+    --text: #555;
+    --text-light: #888;
+    --text-dark: #222;
+    --border: #e8e6e3;
+    --shadow: 0 8px 30px rgba(0,0,0,0.06);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  @media (min-width: 1200px) { .container { padding: 0 48px; } }
+  .section { padding: 100px 0; }
+  @media (max-width: 768px) { .section { padding: 64px 0; } }
+
+  .btn { display: inline-block; background: var(--accent); color: var(--white); font-size: 15px; font-weight: 600; padding: 16px 40px; border-radius: 8px; border: none; cursor: pointer; transition: all 0.25s ease; letter-spacing: 0.02em; }
+  .btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
   @media (max-width: 768px) { .btn { width: 100%; text-align: center; padding: 16px 24px; } }
 
   /* NAV */
-  .nav { padding: 20px 0; background: var(--white); border-bottom: 1px solid var(--border); }
+  .nav { padding: 20px 0; background: var(--dark); border-bottom: 1px solid var(--dark-subtle); position: sticky; top: 0; z-index: 100; }
   .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-size: 20px; font-weight: 800; color: var(--dark); }
+  .nav-logo { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
   .nav-logo span { color: var(--accent); }
-  .nav-link { font-size: 14px; font-weight: 600; color: var(--accent); }
+  .nav-link { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-link:hover { color: var(--white); }
 
   /* HERO */
-  .hero { padding: 100px 0 80px; text-align: center; background: var(--white); }
-  .hero h1 { font-size: 46px; font-weight: 800; color: var(--dark); line-height: 1.15; max-width: 800px; margin: 0 auto 24px; }
-  .hero .sub { font-size: 19px; color: var(--text); max-width: 660px; margin: 0 auto 20px; line-height: 1.6; }
-  .hero .location { font-size: 14px; color: var(--text-light); margin-bottom: 36px; }
-  @media (max-width: 768px) { .hero { padding: 64px 0 56px; } .hero h1 { font-size: 30px; } .hero .sub { font-size: 17px; } }
+  .hero { background: var(--dark); padding: 120px 0 100px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .hero h1 { font-size: 52px; font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .hero .sub { font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 40px; }
+  .hero .btn { background: var(--accent); }
+  .hero-graphic { position: relative; display: flex; align-items: center; justify-content: center; height: 400px; }
+  .funnel-svg { width: 100%; max-width: 380px; height: 380px; filter: drop-shadow(0 8px 32px rgba(174,90,90,0.12)); }
+  .funnel-svg .f-shape { transition: all 0.4s ease; }
+  .funnel-svg .f-shape:hover { filter: brightness(1.2); }
+  @keyframes pulse-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .funnel-svg .pulse { animation: pulse-glow 3s ease-in-out infinite; }
+  .funnel-svg .float { animation: float 4s ease-in-out infinite; }
+  .funnel-svg .float-delay { animation: float 4s ease-in-out 1s infinite; }
+  .funnel-svg .float-delay-2 { animation: float 4s ease-in-out 2s infinite; }
+  @media (max-width: 768px) { .hero { padding: 80px 0 64px; } .hero h1 { font-size: 32px; } .hero .sub { font-size: 16px; } .hero-inner { grid-template-columns: 1fr; } .hero-graphic { display: none; } }
 
-  /* WHAT WE DO */
-  .services { background: var(--light-grey); }
-  .services h2 { font-size: 32px; font-weight: 800; color: var(--dark); text-align: center; margin-bottom: 16px; }
-  .services .intro { font-size: 17px; color: var(--text); text-align: center; max-width: 680px; margin: 0 auto 48px; }
+  /* SECTION HEADERS */
+  .sh { text-align: center; margin-bottom: 56px; }
+  .sh .label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .sh h2 { font-size: 36px; font-weight: 800; color: var(--text-dark); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .sh p { font-size: 17px; font-weight: 300; color: var(--text); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+  @media (max-width: 768px) { .sh h2 { font-size: 28px; } }
+
+  /* SERVICES */
+  .services { background: var(--white); }
   .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .svc-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; }
-  .svc-card h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-  .svc-card p { font-size: 14px; color: var(--text); line-height: 1.6; }
-  @media (max-width: 768px) { .svc-grid { grid-template-columns: 1fr; } .services h2 { font-size: 26px; } }
+  .svc-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 12px; padding: 36px 32px; transition: all 0.25s ease; }
+  .svc-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .svc-card .svc-num { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em; }
+  .svc-card h3 { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.01em; }
+  .svc-card p { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.7; }
+  @media (max-width: 768px) { .svc-grid { grid-template-columns: 1fr; } }
 
   /* APPROACH */
   .approach { background: var(--dark); color: var(--white); }
-  .approach h2 { font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 16px; }
-  .approach .intro { font-size: 17px; opacity: 0.8; text-align: center; max-width: 660px; margin: 0 auto 48px; }
-  .step-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 960px; margin: 0 auto; }
-  .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 28px 24px; }
-  .step-num { font-size: 32px; font-weight: 800; color: var(--accent); margin-bottom: 12px; }
-  .step h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-  .step p { font-size: 13px; opacity: 0.7; line-height: 1.6; }
-  @media (max-width: 768px) { .step-grid { grid-template-columns: 1fr 1fr; } .approach h2 { font-size: 26px; } }
+  .approach .sh h2 { color: var(--white); }
+  .approach .sh p { color: rgba(255,255,255,0.55); }
+  .approach .sh .label { color: var(--accent); }
+  .step-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step { background: var(--dark-card); border: 1px solid var(--dark-subtle); border-radius: 12px; padding: 32px 24px; position: relative; transition: all 0.25s ease; }
+  .step:hover { border-color: var(--accent); }
+  .step-num { font-size: 36px; font-weight: 800; color: rgba(174, 90, 90, 0.2); margin-bottom: 16px; letter-spacing: -0.02em; }
+  .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  .step p { font-size: 13px; font-weight: 300; opacity: 0.6; line-height: 1.65; }
+  @media (max-width: 768px) { .step-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 480px) { .step-grid { grid-template-columns: 1fr; } }
 
   /* RESULTS */
-  .results { background: var(--white); }
-  .results h2 { font-size: 32px; font-weight: 800; color: var(--dark); text-align: center; margin-bottom: 48px; }
-  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
-  .result-card { background: var(--light-grey); border-radius: 14px; padding: 32px; }
-  .result-card .metric { font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
-  .result-card .client { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
-  .result-card .desc { font-size: 14px; color: var(--text); line-height: 1.6; }
-  @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } .results h2 { font-size: 26px; } }
+  .results { background: var(--off-white); }
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .result-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 40px 36px; box-shadow: var(--shadow); transition: all 0.25s ease; }
+  .result-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .result-card:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 540px; margin: 0 auto; }
+  .result-card .metric { font-size: 32px; font-weight: 800; color: var(--accent); margin-bottom: 6px; letter-spacing: -0.02em; }
+  .result-card .client { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-card .desc { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.7; }
+  @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } .result-card { padding: 32px 28px; } }
 
   /* INDUSTRIES */
-  .industries { background: var(--light-grey); }
-  .industries h2 { font-size: 32px; font-weight: 800; color: var(--dark); text-align: center; margin-bottom: 48px; }
+  .industries { background: var(--white); }
   .ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
-  .ind-tag { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; font-size: 15px; font-weight: 600; color: var(--dark); }
-  @media (max-width: 768px) { .ind-grid { grid-template-columns: 1fr 1fr; } .industries h2 { font-size: 26px; } }
+  .ind-tag { background: var(--off-white); border: 1px solid var(--border); border-radius: 10px; padding: 22px 20px; text-align: center; font-size: 14px; font-weight: 600; color: var(--text-dark); transition: all 0.2s ease; }
+  .ind-tag:hover { border-color: var(--accent); background: var(--white); }
+  @media (max-width: 768px) { .ind-grid { grid-template-columns: 1fr 1fr; } }
 
   /* TESTIMONIALS */
-  .testimonials { background: var(--white); }
-  .testimonials h2 { font-size: 32px; font-weight: 800; color: var(--dark); text-align: center; margin-bottom: 48px; }
+  .testimonials { background: var(--off-white); }
   .test-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
-  .test-card { background: var(--light-grey); border-radius: 14px; padding: 32px; }
-  .test-card blockquote { font-size: 15px; color: var(--text); line-height: 1.65; font-style: normal; margin-bottom: 20px; }
-  .test-card .author { font-size: 14px; font-weight: 700; color: var(--dark); }
-  .test-card .role { font-size: 13px; color: var(--text-light); }
-  @media (max-width: 768px) { .test-grid { grid-template-columns: 1fr; } .testimonials h2 { font-size: 26px; } }
+  .test-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 36px 32px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
+  .test-card blockquote { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.75; font-style: normal; margin-bottom: 24px; }
+  .test-card .author-wrap { border-top: 1px solid var(--border); padding-top: 16px; }
+  .test-card .author { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .test-card .role { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  @media (max-width: 768px) { .test-grid { grid-template-columns: 1fr; } }
 
   /* ABOUT */
-  .about { background: var(--light-grey); }
-  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 900px; margin: 0 auto; }
-  .about h2 { font-size: 32px; font-weight: 800; color: var(--dark); margin-bottom: 20px; }
-  .about p { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 14px; }
-  .about .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-  .about .stat-item { background: var(--white); border-radius: 10px; padding: 20px; text-align: center; }
-  .about .stat-num { font-size: 24px; font-weight: 800; color: var(--accent); }
-  .about .stat-label { font-size: 12px; color: var(--text-light); font-weight: 500; margin-top: 4px; }
-  @media (max-width: 768px) { .about-inner { grid-template-columns: 1fr; } .about h2 { font-size: 26px; } }
+  .about { background: var(--white); }
+  .about-content { max-width: 720px; margin: 0 auto 48px; text-align: center; }
+  .about-content p { font-size: 16px; font-weight: 300; color: var(--text); line-height: 1.8; margin-bottom: 16px; }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+  .stat-box { background: var(--off-white); border: 1px solid var(--border); border-radius: 12px; padding: 32px 20px; text-align: center; transition: all 0.25s ease; }
+  .stat-box:hover { border-color: var(--accent); }
+  .stat-box .num { font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+  .stat-box .lbl { font-size: 12px; font-weight: 500; color: var(--text-light); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  @media (max-width: 768px) { .stats-bar { grid-template-columns: 1fr 1fr; } }
 
   /* CTA */
-  .cta-section { background: var(--accent); color: var(--white); text-align: center; padding: 80px 0; }
-  .cta-section h2 { font-size: 32px; font-weight: 800; max-width: 700px; margin: 0 auto 16px; line-height: 1.25; }
-  .cta-section .sub { font-size: 17px; opacity: 0.9; max-width: 560px; margin: 0 auto 36px; }
-  .cta-section .btn-white { display: inline-block; background: var(--white); color: var(--accent); font-size: 16px; font-weight: 700; padding: 16px 48px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; }
-  .cta-section .btn-white:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-  @media (max-width: 768px) { .cta-section { padding: 56px 0; } .cta-section h2 { font-size: 24px; } .cta-section .btn-white { width: 100%; text-align: center; } }
+  .cta-section { background: var(--dark); color: var(--white); text-align: center; padding: 100px 0; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; bottom: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); pointer-events: none; }
+  .cta-section h2 { font-size: 36px; font-weight: 800; max-width: 640px; margin: 0 auto 16px; line-height: 1.15; letter-spacing: -0.02em; }
+  .cta-section .sub { font-size: 17px; font-weight: 300; opacity: 0.6; max-width: 520px; margin: 0 auto 40px; line-height: 1.7; }
+  @media (max-width: 768px) { .cta-section { padding: 64px 0; } .cta-section h2 { font-size: 26px; } }
+
+  /* DIVIDER LINE */
+  .divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); margin: 0 auto; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* GRADIENT BORDER ON HOVER */
+  .gradient-border { position: relative; overflow: hidden; }
+  .gradient-border::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), #c97a7a, var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .gradient-border:hover::after { transform: scaleX(1); }
+
+  /* FLOATING ACCENT DOTS */
+  .hero-dots { position: absolute; top: 60px; left: 48px; display: grid; grid-template-columns: repeat(5, 8px); gap: 12px; opacity: 0.08; }
+  .hero-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .hero-dots-right { position: absolute; bottom: 80px; right: 64px; display: grid; grid-template-columns: repeat(4, 8px); gap: 12px; opacity: 0.06; }
+  .hero-dots-right span { width: 8px; height: 8px; border-radius: 50%; background: var(--white); }
+
+  /* STAT GLOW ON HOVER */
+  .stat-box:hover { box-shadow: 0 0 20px var(--accent-glow); }
+
+  /* QUOTE MARKS */
+  .test-card::before { content: '\201C'; font-size: 64px; font-weight: 800; color: var(--accent); opacity: 0.12; line-height: 1; margin-bottom: -12px; display: block; }
+
+  /* ACCENT STRIPE */
+  .accent-stripe { height: 4px; background: linear-gradient(90deg, var(--accent), #c97a7a, var(--accent-dark)); }
+
+  /* INDUSTRY TAG PULSE */
+  .ind-tag { position: relative; overflow: hidden; }
+  .ind-tag::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(174,90,90,0.04), transparent); transition: left 0.5s ease; }
+  .ind-tag:hover::before { left: 100%; }
 
   /* FOOTER */
-  .footer { background: var(--dark); color: rgba(255,255,255,0.4); text-align: center; padding: 28px 0; font-size: 13px; }
+  .footer { background: var(--dark); border-top: 1px solid var(--dark-subtle); color: rgba(255,255,255,0.3); text-align: center; padding: 24px 0; font-size: 13px; font-weight: 400; }
 </style>
 </head>
 <body>
@@ -117,42 +193,93 @@
 </nav>
 
 <section class="hero">
+  <div class="hero-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="hero-dots-right"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="container">
-    <h1>We Build Complete Client Acquisition Systems That Actually Work</h1>
-    <p class="sub">From ad creative through closed client. Meta ads, funnels, CRM automation, tracking, and performance reporting. We own the whole system and make sure it performs.</p>
-    <p class="location">Based in Calgary, AB. Serving clients across North America.</p>
-    <a href="#contact" class="btn">Book a Strategy Call</a>
+    <div class="hero-inner">
+      <div>
+        <h1>We Build Acquisition Systems That Actually Work</h1>
+        <p class="sub">From ad creative through closed client. Meta ads, funnels, CRM automation, tracking, and performance reporting. We own the whole system and make sure it performs.</p>
+        <a href="#contact" class="btn">Book a Strategy Call</a>
+      </div>
+      <div class="hero-graphic">
+        <svg class="funnel-svg" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer glow ring -->
+          <circle cx="190" cy="190" r="185" stroke="rgba(174,90,90,0.06)" stroke-width="1" class="pulse"/>
+          <circle cx="190" cy="190" r="160" stroke="rgba(174,90,90,0.04)" stroke-width="1"/>
+
+          <!-- Funnel shape - layered trapezoids -->
+          <path d="M90 60 L290 60 L260 130 L120 130 Z" fill="rgba(174,90,90,0.08)" stroke="rgba(174,90,90,0.2)" stroke-width="1" class="f-shape"/>
+          <path d="M120 138 L260 138 L240 198 L140 198 Z" fill="rgba(174,90,90,0.12)" stroke="rgba(174,90,90,0.25)" stroke-width="1" class="f-shape"/>
+          <path d="M140 206 L240 206 L222 258 L158 258 Z" fill="rgba(174,90,90,0.18)" stroke="rgba(174,90,90,0.3)" stroke-width="1" class="f-shape"/>
+          <path d="M158 266 L222 266 L210 310 L170 310 Z" fill="rgba(174,90,90,0.28)" stroke="rgba(174,90,90,0.4)" stroke-width="1" class="f-shape"/>
+          <path d="M170 318 L210 318 L200 350 L180 350 Z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1" class="f-shape" rx="2"/>
+
+          <!-- Animated particles flowing down the funnel -->
+          <circle cx="150" cy="80" r="3" fill="rgba(174,90,90,0.5)" class="float"/>
+          <circle cx="220" cy="90" r="2.5" fill="rgba(174,90,90,0.4)" class="float-delay"/>
+          <circle cx="180" cy="75" r="2" fill="rgba(174,90,90,0.35)" class="float-delay-2"/>
+          <circle cx="200" cy="160" r="3" fill="rgba(174,90,90,0.5)" class="float-delay"/>
+          <circle cx="170" cy="170" r="2" fill="rgba(174,90,90,0.4)" class="float"/>
+          <circle cx="190" cy="230" r="2.5" fill="rgba(174,90,90,0.55)" class="float-delay-2"/>
+          <circle cx="185" cy="285" r="2" fill="rgba(174,90,90,0.6)" class="float"/>
+          <circle cx="190" cy="335" r="3.5" fill="var(--accent)" class="pulse"/>
+
+          <!-- Connecting flow lines -->
+          <line x1="190" y1="130" x2="190" y2="138" stroke="rgba(174,90,90,0.15)" stroke-width="1"/>
+          <line x1="190" y1="198" x2="190" y2="206" stroke="rgba(174,90,90,0.15)" stroke-width="1"/>
+          <line x1="190" y1="258" x2="190" y2="266" stroke="rgba(174,90,90,0.2)" stroke-width="1"/>
+          <line x1="190" y1="310" x2="190" y2="318" stroke="rgba(174,90,90,0.25)" stroke-width="1"/>
+
+          <!-- Side accent dots -->
+          <circle cx="60" cy="100" r="4" fill="rgba(174,90,90,0.1)" class="float-delay"/>
+          <circle cx="320" cy="120" r="3" fill="rgba(174,90,90,0.08)" class="float"/>
+          <circle cx="50" cy="240" r="3" fill="rgba(174,90,90,0.06)" class="float-delay-2"/>
+          <circle cx="330" cy="260" r="4" fill="rgba(174,90,90,0.08)" class="float-delay"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
+<div class="accent-stripe"></div>
 <section class="section services">
   <div class="container">
-    <h2>What We Build</h2>
-    <p class="intro">Most agencies run ads and hand you leads. We build the full system behind the ads and take accountability for it performing end to end.</p>
-    <div class="svc-grid">
-      <div class="svc-card">
+    <div class="sh">
+      <div class="label">What We Build</div>
+      <h2>End-to-End Systems That Turn Leads Into Buyers</h2>
+      <p>Most agencies hand you leads and hope for the best. We build the full system behind the ads and take accountability for it performing.</p>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">01</div>
         <h3>Meta Ad Campaigns</h3>
-        <p>Strategy, targeting, ad copy, and creative direction. Bid cap CBO, lookalike audiences, and Andromeda algorithm diversification. Financial Services Special Ad Category compliance where applicable.</p>
+        <p>Strategy, targeting, ad copy, and creative direction. Bid cap CBO, lookalike audiences, and algorithm diversification frameworks.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">02</div>
         <h3>Funnels and Landing Pages</h3>
         <p>VSL funnels, webinar funnels, application funnels, and direct-response landing pages. Built to convert, not just look good.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">03</div>
         <h3>CRM and Automation</h3>
-        <p>GoHighLevel pipeline builds, email and SMS nurture sequences, lead follow-up automation, and intake workflows. No lead falls through the cracks.</p>
+        <p>GoHighLevel pipeline builds, email and SMS nurture sequences, lead follow-up automation, and intake workflows.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">04</div>
         <h3>Tracking and Attribution</h3>
-        <p>UTM architecture, Meta Pixel, Conversions API, and Looker Studio dashboards via Supermetrics. You know exactly what's working and what's not.</p>
+        <p>UTM architecture, Meta Pixel, Conversions API, and Looker Studio dashboards. You know exactly what's working and what's not.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">05</div>
         <h3>Copy and Creative</h3>
         <p>Direct-response ad scripts, landing page copy, email sequences, and video script direction. Written for conversion, calibrated to your voice.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card gradient-border">
+        <div class="svc-num">06</div>
         <h3>Financial Modeling</h3>
-        <p>Every engagement starts with projected CPL, cost per booked call, close rate assumptions, and ROI at various spend levels. You know what you're buying before you spend a dollar.</p>
+        <p>Every engagement starts with projected CPL, cost per booked call, close rate assumptions, and ROI at various spend levels.</p>
       </div>
     </div>
   </div>
@@ -160,28 +287,31 @@
 
 <section class="section approach">
   <div class="container">
-    <h2>How We Work</h2>
-    <p class="intro">Every engagement follows the same process. No guesswork. No black boxes.</p>
-    <div class="step-grid">
+    <div class="sh">
+      <div class="label">How We Work</div>
+      <h2>No Guesswork. No Black Boxes.</h2>
+      <p>Every engagement follows the same process. You see the model before you spend a dollar.</p>
+    </div>
+    <div class="step-grid reveal">
       <div class="step">
         <div class="step-num">01</div>
         <h3>Financial Model</h3>
-        <p>We build a financial model for your business before you spend a dollar. Projected CPL, cost per booked call, close rate assumptions, and ROI scenarios.</p>
+        <p>We build a financial model for your business. Projected CPL, cost per booked call, close rate assumptions, and ROI scenarios.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <h3>System Build</h3>
-        <p>Ads, funnels, landing pages, CRM pipelines, email/SMS sequences, and tracking infrastructure. Built and tested before anything goes live.</p>
+        <p>Ads, funnels, landing pages, CRM pipelines, email/SMS sequences, and tracking infrastructure. Built and tested before launch.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h3>Launch and Optimize</h3>
-        <p>Campaigns go live with real-time monitoring. We test creative, audiences, and funnel stages. Data drives every decision.</p>
+        <h3>Launch Within 14 Days</h3>
+        <p>Campaigns go live fast. Real-time monitoring from day one. We test creative, audiences, and funnel stages. Data drives every decision.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <h3>Report and Scale</h3>
-        <p>Looker Studio dashboards show exactly what's performing. We scale what works, cut what doesn't, and update the financial model against actuals.</p>
+        <p>No waiting 24 hours for an email reply or a catch-up call. Real-time data on what's working and what isn't. We scale what works, cut what doesn't.</p>
       </div>
     </div>
   </div>
@@ -189,8 +319,11 @@
 
 <section class="section results">
   <div class="container">
-    <h2>Results We've Produced</h2>
-    <div class="result-grid">
+    <div class="sh">
+      <div class="label">Results</div>
+      <h2>Results We've Produced</h2>
+    </div>
+    <div class="result-grid reveal">
       <div class="result-card">
         <div class="metric">$20K/mo to $50K/mo</div>
         <div class="client">Career Coaching Consultant</div>
@@ -202,14 +335,19 @@
         <div class="desc">Built a paid ads webinar strategy that scaled to $15K per day in revenue. Facebook group funnel with automated follow-up and conversion tracking.</div>
       </div>
       <div class="result-card">
-        <div class="metric">$500K+ in Booked Work</div>
+        <div class="metric">$180K in Booked Work</div>
         <div class="client">Home Service Business</div>
         <div class="desc">Full acquisition system build generating consistent booked jobs at approximately 10x ROAS. Ads, landing pages, CRM, and follow-up sequences.</div>
       </div>
       <div class="result-card">
-        <div class="metric">Consistent Results for 12+ Months</div>
+        <div class="metric">$20K+/mo in Added Revenue</div>
         <div class="client">Healthcare Education Platform</div>
-        <div class="desc">Built a webinar funnel system that has been delivering consistently for over a year. Ads, registration pages, email/SMS sequences, and real-time dashboards.</div>
+        <div class="desc">Added $20K+ per month in revenue through Meta ads. Built the full webinar funnel system including registration pages, email/SMS sequences, and real-time Looker Studio dashboards.</div>
+      </div>
+      <div class="result-card">
+        <div class="metric">SEC Reg CF Investor Acquisition</div>
+        <div class="client">B2B SaaS / Equity Crowdfunding</div>
+        <div class="desc">Built a full investor acquisition funnel for a Regulation CF equity crowdfunding raise. Ad scripts across multiple audience buckets, SEC-compliant VSL content, Testing the Waters and live raise landing pages, investor email/SMS nurture sequences, and qualified investor call booking system.</div>
       </div>
     </div>
   </div>
@@ -217,8 +355,11 @@
 
 <section class="section industries">
   <div class="container">
-    <h2>Industries We've Worked In</h2>
-    <div class="ind-grid">
+    <div class="sh">
+      <div class="label">Industries</div>
+      <h2>Industries We've Worked In</h2>
+    </div>
+    <div class="ind-grid reveal">
       <div class="ind-tag">Coaching and Info Products</div>
       <div class="ind-tag">Healthcare Platforms</div>
       <div class="ind-tag">Home Care Agencies</div>
@@ -231,53 +372,64 @@
 
 <section class="section testimonials">
   <div class="container">
-    <h2>What Clients Say</h2>
-    <div class="test-grid">
+    <div class="sh">
+      <div class="label">Client Feedback</div>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="test-grid reveal">
       <div class="test-card">
-        <blockquote>"The value that I've received is far and away in excess of what I had to pay in order to engage with Dustin and the team. Dustin bringing in a different view on marketing, analyzing not just the content I was already doing, but suggesting new things to do and new initiatives and new ways to gather leads and bring them into the funnel were really huge and pivotal for the business."</blockquote>
-        <div class="author">Matthew Farquhar</div>
-        <div class="role">Career Coaching Consultant</div>
+        <blockquote>"The value that I've received is far and away in excess of what I had to pay in order to engage with Dustin and the team. Dustin bringing in a different view on marketing, analyzing not just the content I was already doing, but suggesting new initiatives and new ways to gather leads and bring them into the funnel were really huge and pivotal for the business."</blockquote>
+        <div class="author-wrap">
+          <div class="author">Matthew Farquhar</div>
+          <div class="role">Career Coaching Consultant</div>
+        </div>
       </div>
       <div class="test-card">
         <blockquote>"He's built a whole system for us that actually works and has been delivering consistently for months. That kind of consistency is huge when you're running webinars and workshops because so much goes into the prep, the ads, and the follow-up. Having someone who's not just setting things up but making sure the whole process is optimized has made a big difference for us."</blockquote>
-        <div class="author">Veronika</div>
-        <div class="role">Passive Workforce, Healthcare Education</div>
+        <div class="author-wrap">
+          <div class="author">Veronika Oquendo</div>
+          <div class="role">Passive Workforce, Healthcare Education</div>
+        </div>
       </div>
       <div class="test-card">
-        <blockquote>"There is mountain difference in terms of the returns over the ads. I've been trafficked so good that there was sometimes where I was not even being able to handle the texting. You really sync all these together in a very nice coherent way. There's no way you can lose. I highly recommend you, if you are on the fence, to definitely try it."</blockquote>
-        <div class="author">Abraham Hajjukushyan</div>
-        <div class="role">Registered Dietitian, Weight Loss Program</div>
+        <blockquote>"The difference in returns from the ads has been massive. We were getting so many leads that I couldn't keep up with the responses. Dustin syncs everything together in a really coherent way. There's no way you can lose. I highly recommend it if you're on the fence."</blockquote>
+        <div class="author-wrap">
+          <div class="author">Abraham Anjarkouchian</div>
+          <div class="role">Registered Dietitian, Weight Loss Program</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<div style="padding:40px 0;background:var(--white);"><div class="divider"></div></div>
 <section class="section about">
   <div class="container">
-    <div class="about-inner">
-      <div>
-        <h2>About 780 Marketing</h2>
-        <p>780 Marketing is a performance marketing agency founded by Dustin Jasper in 2022. We build complete client acquisition systems for businesses that need more than just ad management.</p>
-        <p>The agency started after Dustin ran Facebook ads for his own business and saw firsthand how powerful a full acquisition system could be. He went from relying on a door-to-door sales team to generating the same results through ads at a fraction of the cost. That experience made it clear that most businesses were either overpaying for leads or leaving money on the table because nobody was building the full system behind the ads.</p>
-        <p>Today, 780 Marketing serves clients across coaching, healthcare, SaaS, service businesses, and equity crowdfunding. Every engagement starts with a financial model, and every system is built to be measured, optimized, and accountable.</p>
+    <div class="sh">
+      <div class="label">About</div>
+      <h2>About 780 Marketing</h2>
+    </div>
+    <div class="about-content">
+      <p>780 Marketing is a performance marketing agency founded by Dustin Jasper in 2022. We build complete client acquisition systems for businesses that need more than just ad management.</p>
+      <p>The agency started after Dustin ran Facebook ads for his own business and saw firsthand how powerful a full acquisition system could be. He went from relying on a door-to-door sales team to generating the same results through ads at a fraction of the cost. That experience made it clear that most businesses were either overpaying for leads or leaving money on the table because nobody was building the full system behind the ads.</p>
+      <p>Today, 780 Marketing serves clients across coaching, healthcare, SaaS, service businesses, and equity crowdfunding. Every engagement starts with a financial model, and every system is built to be measured, optimized, and accountable.</p>
+    </div>
+    <div class="stats-bar reveal">
+      <div class="stat-box">
+        <div class="num">15+</div>
+        <div class="lbl">Clients Served</div>
       </div>
-      <div class="stats">
-        <div class="stat-item">
-          <div class="stat-num">15+</div>
-          <div class="stat-label">Clients Served</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">$500K+</div>
-          <div class="stat-label">Client Revenue Generated</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">4</div>
-          <div class="stat-label">Years in Business</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Industries Served</div>
-        </div>
+      <div class="stat-box">
+        <div class="num">$500K+</div>
+        <div class="lbl">Client Revenue Generated</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">4</div>
+        <div class="lbl">Years in Business</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">6+</div>
+        <div class="lbl">Industries Served</div>
       </div>
     </div>
   </div>
@@ -286,14 +438,27 @@
 <section class="cta-section" id="contact">
   <div class="container">
     <h2>Want to See What a Full Acquisition System Looks Like for Your Business?</h2>
-    <p class="sub">We'll build a financial model for your business before you spend a dollar. If the math works, we'll show you exactly what the system looks like.</p>
-    <a href="https://calendly.com/dustin-780copy/30min" class="btn-white" target="_blank">Book a Strategy Call</a>
+    <p class="sub">We'll walk through the results we've gotten for other businesses in your industry and map out projections for what our system would cost to implement.</p>
+    <a href="https://calendly.com/dustin-780copy/30min" class="btn" target="_blank">Book a Strategy Call</a>
   </div>
 </section>
 
-<footer class="footer">
-  780 Marketing | Calgary, AB | &copy; 2026
-</footer>
+<footer class="footer">780 Marketing &copy; 2026</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    for(var i=0;i<entries.length;i++){
+      if(entries[i].isIntersecting){
+        entries[i].target.classList.add('visible');
+        observer.unobserve(entries[i].target);
+      }
+    }
+  }, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+  for(var j=0;j<els.length;j++){ observer.observe(els[j]); }
+})();
+</script>
 
 </body>
 </html>
