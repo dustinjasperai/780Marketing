@@ -1,0 +1,325 @@
+<!-- SHOWCASE PAGE LINK: https://packages.780marketing.ca/x-wash -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Audit for X Wash | 780 Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #141414; --bg-card: #1c1c1c; --accent: #ae5a5a; --accent-dim: rgba(174,90,90,0.1); --accent-border: rgba(174,90,90,0.2); --text: #c8c8c4; --text-muted: #787872; --text-bright: #e8e8e4; --white: #f5f5f2; --border: rgba(255,255,255,0.06); --radius: 10px; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; text-decoration: none; }
+  .hero { padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border); }
+  .badge { display: inline-block; padding: 6px 16px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+  .hero h1 { font-size: 40px; font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .hero p { font-size: 17px; color: var(--text); max-width: 600px; margin: 0 auto; }
+  @media (max-width: 768px) { .hero { padding: 56px 0 40px; } .hero h1 { font-size: 28px; } }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin: 48px 0 64px; }
+  .stat { background: var(--bg-card); padding: 24px 16px; text-align: center; }
+  .stat-num { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+  .stat-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .section { padding: 56px 0; }
+  .section-border { border-top: 1px solid var(--border); }
+  .sh { margin-bottom: 36px; }
+  .sh-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .sh h2 { font-size: 28px; font-weight: 800; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .sh p { font-size: 15px; color: var(--text); max-width: 640px; }
+  @media (max-width: 768px) { .sh h2 { font-size: 22px; } }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--accent-border); }
+  .card-full { grid-column: 1 / -1; }
+  .card-tag { display: inline-block; padding: 3px 8px; background: var(--accent-dim); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 12px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--text); line-height: 1.65; }
+  .callout { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(174,90,90,0.06) 100%); border: 1px solid var(--accent-border); border-radius: var(--radius); padding: 36px; text-align: center; margin: 40px 0; }
+  .callout h3 { font-size: 20px; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+  .callout p { font-size: 15px; color: var(--text); max-width: 600px; margin: 0 auto; }
+  .loom-placeholder { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 48px 24px; text-align: center; margin: 0 0 24px; }
+  .loom-placeholder p { font-size: 14px; color: var(--text-muted); }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 20px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  .comp-table th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--bg-card); }
+  .comp-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table .running { color: var(--accent); font-weight: 700; }
+  .comp-table .not-running { color: var(--text-muted); }
+  .comp-table .you { background: rgba(174,90,90,0.05); }
+  .comp-table .you td { color: var(--accent); font-weight: 600; }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .process-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
+  .process-num { font-size: 28px; font-weight: 800; color: rgba(174,90,90,0.15); margin-bottom: 10px; }
+  .process-card h4 { font-size: 14px; font-weight: 700; color: var(--text-bright); margin-bottom: 6px; }
+  .process-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .process-card .time { display: inline-block; margin-top: 8px; padding: 3px 8px; background: var(--accent-dim); border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--accent); }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 24px; }
+  table.fin { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.fin thead { background: var(--bg-card); }
+  table.fin th { padding: 14px 18px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  table.fin td { padding: 12px 18px; border-bottom: 1px solid var(--border); color: var(--text); }
+  table.fin tr:last-child td { border-bottom: none; }
+  table.fin .hl td { color: var(--accent); font-weight: 700; }
+  .disclaimer { margin-top: 16px; font-size: 12px; color: var(--text-muted); text-align: center; font-style: italic; }
+  .cta { text-align: center; padding: 64px 0 80px; border-top: 1px solid var(--border); }
+  .cta h2 { font-size: 28px; font-weight: 800; color: var(--white); margin-bottom: 12px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta p { font-size: 15px; color: var(--text); max-width: 480px; margin: 0 auto 28px; }
+  .cta-alt { display: block; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
+  .cta-alt a { color: var(--accent); }
+  footer { text-align: center; padding: 28px 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } .card-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">Prepared for X Wash</div>
+    <h1>75 Five-Star Reviews. Zero Paid Ads. That's a Gap.</h1>
+    <p>Hamilton homeowners love your work. The reviews prove it. Here's what happens when you put paid advertising behind that reputation.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="stats reveal">
+    <div class="stat"><span class="stat-num">75</span><span class="stat-lbl">Google Reviews</span></div>
+    <div class="stat"><span class="stat-num">4.9</span><span class="stat-lbl">Star Rating</span></div>
+    <div class="stat"><span class="stat-num">15+</span><span class="stat-lbl">Services Offered</span></div>
+    <div class="stat"><span class="stat-num">5+</span><span class="stat-lbl">Service Areas</span></div>
+    <div class="stat"><span class="stat-num">0</span><span class="stat-lbl">Paid Ads Running</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="loom-placeholder reveal">
+    <p>[Loom video walkthrough will be embedded here]</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="callout reveal">
+    <h3>Best Reviews in Hamilton. First Mover on Paid Ads.</h3>
+    <p>We checked the Meta Ad Library. Not a single exterior cleaning company in Hamilton is running paid ads right now. Zero. You would be the first. And you already have the strongest reputation in the market to back it up.</p>
+  </div>
+</div>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Competitor Activity</div>
+      <h2>Who's Advertising in Hamilton Right Now</h2>
+      <p>We checked the Meta Ad Library for every exterior cleaning company in your market. Here's what we found.</p>
+    </div>
+    <div class="reveal">
+      <table class="comp-table">
+        <thead><tr><th>Company</th><th>Google Reviews</th><th>Running Meta Ads?</th></tr></thead>
+        <tbody>
+          <tr><td>Hamilton Power Wash Pros</td><td>~50 reviews</td><td class="not-running">No ads</td></tr>
+          <tr><td>Sparkle Wash Hamilton</td><td>~30 reviews</td><td class="not-running">No ads</td></tr>
+          <tr><td>Clean Sweep Exteriors</td><td>~40 reviews</td><td class="not-running">No ads</td></tr>
+          <tr><td>Other local competitors (~9 more)</td><td>Varies</td><td class="not-running">No ads</td></tr>
+          <tr class="you"><td>X Wash</td><td>75 reviews, 4.9 stars</td><td class="not-running">No ads</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:var(--text-muted);text-align:center;">None of your ~12 competitors are running Meta ads. This is a first mover opportunity.</p>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Your Advantages</div>
+      <h2>What Makes X Wash Different From Day One</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card card-full reveal">
+        <div class="card-tag">Strongest Asset</div>
+        <h3>75 Reviews at 4.9 Stars = The Best Ad Creative in Hamilton</h3>
+        <p>Ads built from real customer reviews outperform scripted copy every time. You have 75 five-star reviews to pull from. Real quotes, real names, real results. No competitor in your market has this volume at this rating. Your reviews are the ad creative. We just put them in front of more homeowners.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Trust</div>
+        <h3>Jake's Personal Brand Sells</h3>
+        <p>Homeowners hire people, not logos. Jake on camera talking about how he approaches a job, explaining the soft wash process, or showing a before and after builds more trust than any stock photo ever could. A real face behind the business beats a faceless competitor every time.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Niche</div>
+        <h3>Cedar Roof Cleaning Is a Premium Service</h3>
+        <p>Most pressure washing companies do not touch cedar roofs. It requires specific knowledge and technique. You offer it. That means you can run targeted ads for a high-value service that nobody else is advertising. Less competition, higher job value.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Positioning</div>
+        <h3>Eco-Friendly Sets You Apart</h3>
+        <p>Homeowners care about what goes on their property and into their yards. Your eco-friendly solutions give you a clear angle that most competitors cannot match. It is a real differentiator, especially with families and pet owners.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Timing</div>
+        <h3>First Mover in a Market of 12+ Competitors</h3>
+        <p>Zero exterior cleaning companies in Hamilton are running Meta ads. That means the first one to start owns the feed. No bidding wars. No competing creatives. Just your ads in front of homeowners who are already searching for these services. That window will not stay open forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Gap Analysis</div>
+      <h2>Where the Growth Is Hiding</h2>
+      <p>These are not criticisms. They are opportunities. Every gap is something that can be turned on.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal">
+        <div class="card-tag">Biggest Gap</div>
+        <h3>Zero Meta Ads Running</h3>
+        <p>You are invisible to homeowners who are not already searching Google for you. Meta ads put you in front of people before they even know they need exterior cleaning. That is where most of the market lives.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Social</div>
+        <h3>132 Facebook Followers</h3>
+        <p>Your Facebook page has a small following. That is fine. Organic social is slow. But paid ads do not need a big following. They go directly to homeowners in Hamilton, Ancaster, Stoney Creek, Dundas, and Caledonia whether they follow you or not.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Content</div>
+        <h3>No Video Content for Ads</h3>
+        <p>Before and after videos are the highest performing ad format in home services. A 30-second phone video of a dirty driveway turning clean stops the scroll. You have the transformations. You just need to film them. We write the scripts, you film on your phone.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Consistency</div>
+        <h3>NAP Inconsistency Across Listings</h3>
+        <p>Your business name, address, and phone number should match exactly across Google, Facebook, Yelp, and every directory. Small differences confuse Google and can lower your local search ranking. Easy fix, big impact.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Revenue</div>
+        <h3>Seasonal Vulnerability</h3>
+        <p>Exterior cleaning slows down in the winter months. Without a system to fill the pipeline during shoulder seasons, revenue drops. Targeted campaigns for specific services (eavestrough clearing in fall, early spring bookings) smooth out the revenue curve.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Systems</div>
+        <h3>No Automated Follow-Up</h3>
+        <p>When a lead comes in, speed matters. An automated text and email within 60 seconds keeps you top of mind. Without it, leads go cold or call the next company on the list. A simple follow-up system closes more of the leads you are already getting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">The Numbers</div>
+      <h2>Estimated Revenue from Paid Ads</h2>
+      <p>These projections use estimated industry averages for Hamilton. Actual numbers would be adjusted based on your real pricing and close rates.</p>
+    </div>
+
+    <div class="sh reveal" style="margin-top:36px;">
+      <h3 style="font-size:18px;font-weight:700;color:var(--text-bright);">House Washing (Estimated Avg. Job: $400)</h3>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="fin">
+        <thead><tr><th>Metric</th><th>Conservative</th><th>Moderate</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly ad spend</td><td>$1,000</td><td>$1,000</td></tr>
+          <tr><td>Estimated cost per lead</td><td>$20</td><td>$12</td></tr>
+          <tr><td>Estimated leads / month</td><td>50</td><td>83</td></tr>
+          <tr><td>Estimated quote rate</td><td>45%</td><td>55%</td></tr>
+          <tr><td>Estimated close rate</td><td>30%</td><td>40%</td></tr>
+          <tr><td>Estimated booked jobs</td><td>7</td><td>18</td></tr>
+          <tr class="hl"><td>Estimated revenue from ads</td><td>$2,800</td><td>$7,200</td></tr>
+          <tr class="hl"><td>Estimated ROAS</td><td>2.8x</td><td>7.2x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">All figures above are estimates based on industry averages. Actual results will vary based on your pricing, close rate, and market conditions.</p>
+
+    <div class="sh reveal" style="margin-top:36px;">
+      <h3 style="font-size:18px;font-weight:700;color:var(--text-bright);">Roof Cleaning (Estimated Avg. Job: $600)</h3>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="fin">
+        <thead><tr><th>Metric</th><th>Conservative</th><th>Moderate</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly ad spend</td><td>$750</td><td>$750</td></tr>
+          <tr><td>Estimated cost per lead</td><td>$25</td><td>$15</td></tr>
+          <tr><td>Estimated leads / month</td><td>30</td><td>50</td></tr>
+          <tr><td>Estimated quote rate</td><td>40%</td><td>50%</td></tr>
+          <tr><td>Estimated close rate</td><td>30%</td><td>40%</td></tr>
+          <tr><td>Estimated booked jobs</td><td>4</td><td>10</td></tr>
+          <tr class="hl"><td>Estimated revenue from ads</td><td>$2,400</td><td>$6,000</td></tr>
+          <tr class="hl"><td>Estimated ROAS</td><td>3.2x</td><td>8x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">All figures above are estimates based on industry averages. Actual results will vary based on your pricing, close rate, and market conditions.</p>
+
+    <div class="callout reveal" style="margin-top:36px;">
+      <h3>Combined Estimated Potential: $5,200 to $13,200/month</h3>
+      <p>These are estimates only. With 75 reviews at 4.9 stars, your close rate is likely higher than the conservative numbers shown here. Real customer proof does a lot of the selling for you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">The System</div>
+      <h2>What We Would Build for X Wash</h2>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h4>Before/After Video Ads</h4>
+        <p>We write ad scripts for your top services. You film short before and after videos on your phone. Dirty driveway to clean driveway. Stained deck to fresh deck. These stop the scroll and get homeowners to reach out.</p>
+        <span class="time">Week 1-2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h4>Jake on Camera</h4>
+        <p>Short videos of Jake explaining the process, showing up to a job, or talking about why eco-friendly matters. Homeowners trust a real person. We write the scripts, you hit record on your phone.</p>
+        <span class="time">Week 1-2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h4>CRM + Automated Follow-Up</h4>
+        <p>Every lead gets a text and email within 60 seconds. Automated nurture sequence so no inquiry goes cold. Speed to lead wins in home services.</p>
+        <span class="time">Week 2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h4>Seasonal Campaign Timing</h4>
+        <p>Spring push for house washing and deck cleaning. Summer for roof cleaning and cedar roofs. Fall for eavestrough clearing. Campaigns match when homeowners are thinking about each service.</p>
+        <span class="time">Ongoing</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">05</div>
+        <h4>Retargeting for Annual Customers</h4>
+        <p>Homeowners who booked last year see your ads again when the season comes back around. Turn one-time customers into annual accounts without chasing them down manually.</p>
+        <span class="time">Month 3+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container reveal">
+    <h2>Want to Be the First Exterior Cleaner Running Ads in Hamilton?</h2>
+    <p>Quick call. We will look at your Hamilton market, your best services, and what a system build would look like for X Wash.</p>
+    <div class="calendly-inline-widget" data-url="[CALENDLY_LINK]" style="min-width:320px;height:700px;border-radius:10px;overflow:hidden;margin-top:24px;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <span class="cta-alt">or email: <a href="mailto:dustin@780marketing.com">dustin@780marketing.com</a></span>
+  </div>
+</section>
+
+<footer>Prepared specifically for X Wash. March 2026. Built by 780 Marketing.</footer>
+
+<script>
+(function(){var r=document.querySelectorAll('.reveal');var o=new IntersectionObserver(function(e){for(var i=0;i<e.length;i++){if(e[i].isIntersecting){e[i].target.classList.add('visible');o.unobserve(e[i].target);}}},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});for(var j=0;j<r.length;j++){o.observe(r[j]);}})();
+</script>
+</body>
+</html>
