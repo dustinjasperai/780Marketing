@@ -1,0 +1,323 @@
+<!-- SHOWCASE PAGE LINK: https://packages.780marketing.ca/homa-christmas-lights -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Audit for Homa Christmas Lights | 780 Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #141414; --bg-card: #1c1c1c; --accent: #ae5a5a; --accent-dim: rgba(174,90,90,0.1); --accent-border: rgba(174,90,90,0.2); --text: #c8c8c4; --text-muted: #787872; --text-bright: #e8e8e4; --white: #f5f5f2; --border: rgba(255,255,255,0.06); --radius: 10px; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; text-decoration: none; }
+  .hero { padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border); }
+  .badge { display: inline-block; padding: 6px 16px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
+  .hero h1 { font-size: 40px; font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .hero p { font-size: 17px; color: var(--text); max-width: 600px; margin: 0 auto; }
+  @media (max-width: 768px) { .hero { padding: 56px 0 40px; } .hero h1 { font-size: 28px; } }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin: 48px 0 64px; }
+  .stat { background: var(--bg-card); padding: 24px 16px; text-align: center; }
+  .stat-num { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+  .stat-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .section { padding: 56px 0; }
+  .section-border { border-top: 1px solid var(--border); }
+  .sh { margin-bottom: 36px; }
+  .sh-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .sh h2 { font-size: 28px; font-weight: 800; color: var(--white); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .sh p { font-size: 15px; color: var(--text); max-width: 640px; }
+  @media (max-width: 768px) { .sh h2 { font-size: 22px; } }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--accent-border); }
+  .card-full { grid-column: 1 / -1; }
+  .card-tag { display: inline-block; padding: 3px 8px; background: var(--accent-dim); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 12px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--text); line-height: 1.65; }
+  .callout { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(174,90,90,0.06) 100%); border: 1px solid var(--accent-border); border-radius: var(--radius); padding: 36px; text-align: center; margin: 40px 0; }
+  .callout h3 { font-size: 20px; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+  .callout p { font-size: 15px; color: var(--text); max-width: 600px; margin: 0 auto; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 20px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  .comp-table th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); background: var(--bg-card); }
+  .comp-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table .running { color: var(--accent); font-weight: 700; }
+  .comp-table .not-running { color: var(--text-muted); }
+  .comp-table .you { background: rgba(174,90,90,0.05); }
+  .comp-table .you td { color: var(--accent); font-weight: 600; }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .process-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
+  .process-num { font-size: 28px; font-weight: 800; color: rgba(174,90,90,0.15); margin-bottom: 10px; }
+  .process-card h4 { font-size: 14px; font-weight: 700; color: var(--text-bright); margin-bottom: 6px; }
+  .process-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .process-card .time { display: inline-block; margin-top: 8px; padding: 3px 8px; background: var(--accent-dim); border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--accent); }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); margin-top: 24px; }
+  table.fin { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.fin thead { background: var(--bg-card); }
+  table.fin th { padding: 14px 18px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  table.fin td { padding: 12px 18px; border-bottom: 1px solid var(--border); color: var(--text); }
+  table.fin tr:last-child td { border-bottom: none; }
+  table.fin .hl td { color: var(--accent); font-weight: 700; }
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 24px; }
+  .gap-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
+  .gap-card h4 { font-size: 14px; font-weight: 700; color: var(--text-bright); margin-bottom: 6px; }
+  .gap-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .gap-icon { font-size: 20px; margin-bottom: 10px; }
+  .loom-placeholder { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 48px 24px; text-align: center; margin: 40px 0; }
+  .loom-placeholder p { font-size: 14px; color: var(--text-muted); }
+  .loom-placeholder .loom-title { font-size: 16px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+  .estimate-note { margin-top: 16px; font-size: 12px; color: var(--text-muted); text-align: center; font-style: italic; }
+  .cta { text-align: center; padding: 64px 0 80px; border-top: 1px solid var(--border); }
+  .cta h2 { font-size: 28px; font-weight: 800; color: var(--white); margin-bottom: 12px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta p { font-size: 15px; color: var(--text); max-width: 480px; margin: 0 auto 28px; }
+  .cta-btn { display: inline-block; padding: 14px 36px; background: var(--accent); color: var(--white); font-size: 15px; font-weight: 700; border-radius: var(--radius); transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .cta-alt { display: block; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
+  .cta-alt a { color: var(--accent); }
+  footer { text-align: center; padding: 28px 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } .card-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr 1fr; } .gap-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">Prepared for Homa</div>
+    <h1>Growth Audit: 19 Employees, Award-Winning Work, Zero Paid Ads</h1>
+    <p>Homa has the team, the reputation, and the services. Here is what happens when you add paid advertising on top of that foundation.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="stats reveal">
+    <div class="stat"><span class="stat-num">19</span><span class="stat-lbl">Employees</span></div>
+    <div class="stat"><span class="stat-num">13</span><span class="stat-lbl">Services Offered</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-lbl">Years in Business</span></div>
+    <div class="stat"><span class="stat-num">2</span><span class="stat-lbl">Markets (EN + FR)</span></div>
+    <div class="stat"><span class="stat-num">0</span><span class="stat-lbl">Active Paid Ads</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="loom-placeholder reveal">
+    <p class="loom-title">Video Walkthrough</p>
+    <p>A personalized Loom video walking through this audit will be embedded here.</p>
+    <!-- Replace this div with Loom embed code: <div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="LOOM_URL" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div> -->
+  </div>
+</div>
+
+<div class="container">
+  <div class="callout reveal">
+    <h3>Consumer Choice Award Winner. Zero Paid Ads.</h3>
+    <p>Homa has something most competitors do not: an award-winning reputation and the crew to back it up. But franchise competitors like Shack Shine and Christmas Decor are running ads in your market. Homeowners are seeing them first instead of you.</p>
+  </div>
+</div>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Competitor Activity</div>
+      <h2>Who Is Advertising in Ottawa-Gatineau Right Now</h2>
+    </div>
+    <div class="reveal">
+      <table class="comp-table">
+        <thead><tr><th>Company</th><th>Type</th><th>Running Meta Ads?</th></tr></thead>
+        <tbody>
+          <tr><td>Shack Shine Ottawa</td><td>National franchise</td><td class="running">Yes - Active</td></tr>
+          <tr><td>Christmas Decor Ottawa</td><td>Franchise (GLO Outdoor Lighting)</td><td class="running">Likely - Corporate budget</td></tr>
+          <tr><td>Ottawa Valley Christmas Lights</td><td>Local specialist</td><td class="not-running">No ads found</td></tr>
+          <tr><td>Christmas Lights Ottawa</td><td>Local specialist</td><td class="not-running">No ads found</td></tr>
+          <tr class="you"><td>Homa Christmas Lights</td><td>19 employees, award winner</td><td class="not-running">No ads</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Your Advantages</div>
+      <h2>Why Paid Ads Would Work Especially Well for Homa</h2>
+      <p>Most businesses we look at have one or two things going for them. Homa has a full stack of advantages that make advertising unusually effective.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card card-full reveal">
+        <div class="card-tag">Strongest Asset</div>
+        <h3>Licensed Celebright Installer = High-Ticket, High-Margin Product</h3>
+        <p>Permanent outdoor lighting at $2,000 - $4,000 per facade is the kind of product that performs extremely well with Meta ads. The visual before/after is stunning. The price point supports ad spend easily. Homeowners want this but do not know who to call. You are one of a small number of authorized dealers in the market. That is a huge advantage in advertising.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Trust Signal</div>
+        <h3>Consumer Choice Award Winner</h3>
+        <p>This goes in every ad. Most competitors cannot say this. In paid advertising, trust signals like awards directly improve how many people click, call, and book. It is built-in credibility that money cannot buy.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Untapped Market</div>
+        <h3>Bilingual = Wide Open Gatineau Market</h3>
+        <p>Almost no home service companies run French-language Meta ads targeting the Gatineau and Quebec side. This is wide open. Homa could run French-language ads with virtually zero competition and own that entire side of the market.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Capacity</div>
+        <h3>19 Employees Ready to Handle More Volume</h3>
+        <p>Many smaller companies cannot scale because they do not have the crew. Homa already does. When ads bring in more leads, your team can handle the work. That is a bottleneck most competitors still face.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-tag">Year-Round Revenue</div>
+        <h3>13 Services = Multi-Season Cross-Sell</h3>
+        <p>A customer who comes in for Christmas lights becomes a year-round client: gutter cleaning in spring, pressure washing in summer, caulking in fall, lights again in winter. One ad-driven customer can generate 3-4 repeat bookings per year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">Gap Analysis</div>
+      <h2>What Is Missing Right Now</h2>
+    </div>
+    <div class="gap-grid reveal">
+      <div class="gap-card">
+        <h4>Zero Meta Ads</h4>
+        <p>No current or historical Facebook or Instagram campaigns. Franchise competitors with ad budgets are capturing the homeowners who search online, see an ad, and book the first professional company they find.</p>
+      </div>
+      <div class="gap-card">
+        <h4>Two Instagram Accounts</h4>
+        <p>@services_homa_ (369 followers) and @homa_services_ (231 followers). Combined: roughly 600 followers. Two accounts split the audience, confuse customers, and weaken brand presence. Should be one consolidated account.</p>
+      </div>
+      <div class="gap-card">
+        <h4>No Video Content Strategy</h4>
+        <p>Christmas lights are one of the most visual home services. Before/after videos, time-lapse installs, and drone shots of lit-up homes sell the service without saying much. This content does not exist yet.</p>
+      </div>
+      <div class="gap-card">
+        <h4>No French-Language Ads</h4>
+        <p>The entire Gatineau market is untapped by paid ads. No competitor is running French-language Meta ads for Christmas light or permanent lighting installation in this area. That is rare and valuable.</p>
+      </div>
+      <div class="gap-card">
+        <h4>No CRM or Follow-Up System</h4>
+        <p>Leads need follow-up within minutes, not days. Without automated text and email follow-up, leads go cold and get booked by faster competitors.</p>
+      </div>
+      <div class="gap-card">
+        <h4>Celebright Under-Marketed</h4>
+        <p>The highest-margin product in the lineup is not getting dedicated ad attention. Permanent lighting with 5 million colors and a 20-year lifespan practically sells itself in a 30-second video ad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">The Numbers</div>
+      <h2>Revenue Projections: Seasonal Christmas Lights</h2>
+      <p>All figures below are estimates based on industry averages for the Ottawa market. Actual results would vary based on ad spend, seasonality, pricing, close rate, and other factors. These are projections, not guarantees.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="fin">
+        <thead><tr><th>Metric</th><th>Conservative (Est.)</th><th>Moderate (Est.)</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly ad spend</td><td>$1,500</td><td>$2,500</td></tr>
+          <tr><td>Cost per lead</td><td>$50</td><td>$25</td></tr>
+          <tr><td>Leads per month</td><td>30</td><td>100</td></tr>
+          <tr><td>Close rate</td><td>20%</td><td>30%</td></tr>
+          <tr><td>Booked jobs</td><td>6</td><td>30</td></tr>
+          <tr><td>Avg. job value</td><td>$1,500</td><td>$3,000</td></tr>
+          <tr class="hl"><td>Est. monthly revenue from ads</td><td>$9,000</td><td>$90,000</td></tr>
+          <tr class="hl"><td>Est. ROAS</td><td>6x</td><td>36x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="estimate-note">Even at the conservative end, $1,500/month in ad spend producing 6 booked jobs at $1,500 each is $9,000 in revenue. That is a 6x return.</p>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">High-Margin Opportunity</div>
+      <h2>Revenue Projections: Permanent Lighting (Celebright)</h2>
+      <p>Estimates only. Actual results depend on multiple variables specific to your business.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="fin">
+        <thead><tr><th>Metric</th><th>Conservative (Est.)</th><th>Moderate (Est.)</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly ad spend</td><td>$1,000</td><td>$2,000</td></tr>
+          <tr><td>Cost per lead</td><td>$60</td><td>$30</td></tr>
+          <tr><td>Leads per month</td><td>17</td><td>67</td></tr>
+          <tr><td>Close rate</td><td>15%</td><td>25%</td></tr>
+          <tr><td>Booked jobs</td><td>3</td><td>17</td></tr>
+          <tr><td>Avg. job value</td><td>$2,000</td><td>$4,000</td></tr>
+          <tr class="hl"><td>Est. monthly revenue from ads</td><td>$6,000</td><td>$68,000</td></tr>
+          <tr class="hl"><td>Est. ROAS</td><td>6x</td><td>34x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="estimate-note">Permanent lighting is year-round, not seasonal. Higher price point means each conversion is worth more. Phone-controlled, 5 million colors, 20-year lifespan: these features practically sell themselves in a 30-second video.</p>
+  </div>
+</section>
+
+<section class="section section-border">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-label">The Strategy</div>
+      <h2>What We Would Build for Homa</h2>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h4>Video Ad Campaigns</h4>
+        <p>Meta ads targeting Ottawa-Gatineau homeowners. We write the scripts. Your team films short 30-60 second videos on their phone. Authentic content outperforms polished video on Meta.</p>
+        <span class="time">Week 1-2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h4>Celebright Demo Ads</h4>
+        <p>Dedicated campaigns for the permanent lighting product. Show the same house cycling through colors, controlled from a phone, with text about the 20-year lifespan. High engagement, qualified leads.</p>
+        <span class="time">Week 2-3</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h4>French-Language Campaigns</h4>
+        <p>Duplicate top-performing English ads in French. Target the Quebec side. Low competition means lower ad costs and higher visibility. Own the Gatineau market.</p>
+        <span class="time">Month 2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h4>CRM + Follow-Up System</h4>
+        <p>Automated text and email on every lead. Speed-to-lead follow-up so no inquiry goes cold. Clear booking process from ad click to booked job.</p>
+        <span class="time">Week 2</span>
+      </div>
+      <div class="process-card">
+        <div class="process-num">05</div>
+        <h4>Commercial B2B Ads</h4>
+        <p>Targeted ads reaching property managers and commercial building owners. Show the commercial installation portfolio. Higher ticket, repeat-business vertical.</p>
+        <span class="time">Month 3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container reveal">
+    <h2>Ready to Put 19 Employees and an Award-Winning Reputation to Work?</h2>
+    <p>Quick call. We will look at your Ottawa-Gatineau market, the Celebright opportunity, and the French-language gap no one else is filling.</p>
+    <a href="[CALENDLY_LINK]" class="cta-btn">Book a Call</a>
+    <span class="cta-alt">or email: <a href="mailto:dustin@780marketing.com">dustin@780marketing.com</a></span>
+  </div>
+</section>
+
+<footer>Prepared specifically for Homa. March 2026.</footer>
+
+<script>
+(function(){var r=document.querySelectorAll('.reveal');var o=new IntersectionObserver(function(e){for(var i=0;i<e.length;i++){if(e[i].isIntersecting){e[i].target.classList.add('visible');o.unobserve(e[i].target);}}},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});for(var j=0;j<r.length;j++){o.observe(r[j]);}})();
+</script>
+</body>
+</html>
