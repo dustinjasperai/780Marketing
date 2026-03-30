@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>780 Marketing | D100 Evergreen VSL Slides (Soft)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #141414; color: #e8e8e4; overflow: hidden; height: 100vh; }
+  .slide { display: none; width: 100vw; height: 100vh; padding: 80px 120px; flex-direction: column; justify-content: center; position: relative; }
+  .slide.active { display: flex; }
+  .slide-num { position: absolute; top: 40px; right: 60px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.15); letter-spacing: 0.1em; }
+  .logo { position: absolute; top: 40px; left: 60px; font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.2); }
+  .logo span { color: rgba(174,90,90,0.4); }
+  h1 { font-size: 56px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; max-width: 900px; }
+  h2 { font-size: 44px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; max-width: 850px; }
+  h3 { font-size: 32px; font-weight: 700; line-height: 1.25; max-width: 800px; }
+  p { font-size: 22px; font-weight: 400; line-height: 1.6; color: rgba(255,255,255,0.6); max-width: 700px; margin-top: 20px; }
+  .accent { color: #ae5a5a; }
+  .dim { color: rgba(255,255,255,0.35); }
+  .highlight { background: rgba(174,90,90,0.1); border-left: 4px solid #ae5a5a; padding: 24px 32px; border-radius: 0 10px 10px 0; margin-top: 32px; max-width: 800px; }
+  .highlight p { margin-top: 0; color: rgba(255,255,255,0.7); font-size: 20px; }
+  .stat-row { display: flex; gap: 48px; margin-top: 40px; }
+  .stat { text-align: left; }
+  .stat .num { font-size: 48px; font-weight: 800; color: #ae5a5a; }
+  .stat .label { font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .list { margin-top: 28px; }
+  .list li { font-size: 22px; color: rgba(255,255,255,0.65); padding: 10px 0 10px 28px; position: relative; list-style: none; line-height: 1.5; }
+  .list li::before { content: ''; position: absolute; left: 0; top: 20px; width: 8px; height: 8px; border-radius: 50%; background: #ae5a5a; }
+  .speaker-note { position: absolute; bottom: 40px; left: 60px; right: 60px; background: rgba(174,90,90,0.06); border: 1px solid rgba(174,90,90,0.15); border-radius: 8px; padding: 16px 24px; font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+  .speaker-note strong { color: rgba(174,90,90,0.6); }
+  .nav-hint { position: fixed; bottom: 20px; right: 40px; font-size: 12px; color: rgba(255,255,255,0.15); }
+  .toggle-notes { position: fixed; top: 20px; right: 20px; background: rgba(174,90,90,0.15); border: 1px solid rgba(174,90,90,0.3); color: rgba(255,255,255,0.5); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; z-index: 100; font-family: 'Inter', sans-serif; }
+  .toggle-notes:hover { background: rgba(174,90,90,0.25); color: rgba(255,255,255,0.7); }
+  body.hide-notes .speaker-note { display: none; }
+  body.hide-notes .toggle-notes { opacity: 0.3; }
+  .center { text-align: center; align-items: center; }
+  .center h1, .center h2, .center h3, .center p { max-width: 100%; }
+  @media (max-width: 1024px) { .slide { padding: 40px 48px; } h1 { font-size: 40px; } h2 { font-size: 34px; } h3 { font-size: 26px; } p { font-size: 18px; } }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: INTRO -->
+<div class="slide active" id="s1">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">01</div>
+  <h1>I Put Together a <span class="accent">Custom Audit</span> for Your Business</h1>
+  <p>Before you scroll down, here's some quick context on what's in it and why it's worth a few minutes of your time.</p>
+  <div class="speaker-note"><strong>TALK:</strong> "Hey, how's it going? My name is Dustin Jasper, and I'm recording this quick video for you because I just put together a custom audit for your business that's right below this video. Before you scroll down and check it out, I want to give you some quick context on what's in it and why I think it's worth a few minutes of your time."</div>
+</div>
+
+<!-- SLIDE 2: WHAT'S IN THE AUDIT -->
+<div class="slide" id="s2">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">02</div>
+  <h2>What's in <span class="accent">Your Audit</span></h2>
+  <ul class="list">
+    <li>Your market and competitive landscape: who's running paid ads and what strategies they're using</li>
+    <li>Specific advantages your business has that would make paid ads work well</li>
+    <li>Realistic revenue numbers based on your average job size and our historical data</li>
+  </ul>
+  <div class="highlight">
+    <p>This isn't a generic template blasted to hundreds of businesses. This is unique to you and your business.</p>
+  </div>
+  <div class="speaker-note"><strong>TALK:</strong> "So here's what I put together for you. First I looked into your market and the competitive landscape. Specifically, who in your area is currently running paid ads and the strategies they're using. I then looked at your business and identified some specific advantages you have that would make paid ads work well for you. And then I ran the numbers on what a paid ad system could realistically produce based on your estimated average job size and the numbers we've gotten for businesses like yours in the past. So before you scroll away, this isn't a generic template that's been blasted to hundreds of other businesses, this is actually unique to you and your business."</div>
+</div>
+
+<!-- SLIDE 3: THE PROBLEM -->
+<div class="slide" id="s3">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">03</div>
+  <h2>Here's What I See With <span class="accent">Most Home Service Businesses</span></h2>
+  <ul class="list">
+    <li>Revenue is unpredictable, especially for seasonal businesses</li>
+    <li>You hire an agency or buy leads. You get a spreadsheet. Very few convert.</li>
+    <li>HomeStars, Thumbtack, and similar services have you competing for the same leads</li>
+  </ul>
+  <div class="speaker-note"><strong>TALK:</strong> "So I wanted to quickly go over what I learned from running my own home service business a couple seasons ago and what I commonly hear from other guys in the industry. Revenue is unpredictable, especially if your business is seasonal. When demand is high, everything is great. But when it slows down, you're scrambling to keep your guys busy. And there's really a couple common solutions guys will turn to. One is hiring an external ad agency to run ads for them, or try services like HomeStars or Thumbtack or others where you're essentially buying leads. But what I found when I tried these services and from the other people I speak to is that you're often handed a spreadsheet full of leads and very few if any of them end up converting into booked jobs."</div>
+</div>
+
+<!-- SLIDE 4: WHAT ACTUALLY MAKES ADS WORK -->
+<div class="slide" id="s4">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">04</div>
+  <h2>Ads Work for Home Services.<br><span class="accent">The Problem Is What Happens After the Click.</span></h2>
+  <p>Most home service businesses grow through referrals, partnerships, and door-to-door. The sales process for cold leads from ads is entirely different.</p>
+  <div class="speaker-note"><strong>TALK:</strong> "So here's what I've found after running my own home service business that was almost entirely reliant on ads and running ads for dozens of other businesses. The ad itself is rarely the problem. Ads do work for home services. The part that almost always breaks is everything that happens after a lead clicks an ad. Most home service businesses start and scale through strategies like referrals, partnerships and door-to-door sales teams. What this means is that most of the leads you're getting in touch with have some kind of warm touch point first. But the sales process for leads coming from ads is entirely different. There needs to be more trust built into the sales process, they need to have their questions answered before you reach out and they need to know why they should go with you instead of your competitors. I know this because I've gone through the growing pains of running ads for my own business and I got tired of calling leads who didn't know who we were, didn't know why they submitted a form and had a low likelihood of ever actually booking a job."</div>
+</div>
+
+<!-- SLIDE 5: WHAT WE FOUND WORKS -->
+<div class="slide" id="s5">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">05</div>
+  <h2>3 Things That <span class="accent">Actually Move the Needle</span></h2>
+  <ul class="list">
+    <li>Properly qualifying leads on the ad so you attract people who actually want to book</li>
+    <li>Backend systems that warm leads up on your business before you ever call them</li>
+    <li>A dedicated sales process for cold leads, because they're different from referrals</li>
+  </ul>
+  <div class="speaker-note"><strong>TALK:</strong> "So after going through this with my own business and working with other businesses in the industry, there's a couple strategies we've found that make a huge difference. These are all strategies we've taken and refined from our own business or taken from running ads in other industries. Number one is properly qualifying leads on the ad. Most agencies are incentivized to give you a bunch of leads so they optimize for volume and leave you with crappy leads. But instead by using the proper qualifying language on the ad and having systems in place post click, you can attract leads that are actively searching for your services and wanting to book a job. Number two, backend sales systems. This is something I took from other industries I was running ads for. So before a lead is ever getting a call from your business, the goal is that they've consumed a bunch of information on your business, the service you offer and why they should choose you. This essentially warms them up before you reach out and builds the trust that a referral from their neighbor would. Number three is a dedicated sales process for cold leads. As I alluded to earlier, cold leads have different needs than a lead that came from a referral or partnership. So we developed call scripts, email templates and all those kinds of things that warm up your business quickly before you ever reach out."</div>
+</div>
+
+<!-- SLIDE 6: WHY WE KNOW THIS WORKS -->
+<div class="slide" id="s6">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">06</div>
+  <h2>Why We Know <span class="accent">This Works</span></h2>
+  <div class="stat-row">
+    <div class="stat"><div class="num">$180K</div><div class="label">Booked from Ads (Peter's Business)</div></div>
+    <div class="stat"><div class="num">14.4%</div><div class="label">Marketing Cost</div></div>
+    <div class="stat"><div class="num">$2M+</div><div class="label">Home Service Revenue Managed</div></div>
+  </div>
+  <ul class="list" style="margin-top:32px;">
+    <li>Window cleaning, gutter cleaning, arborists, concrete sealing</li>
+    <li>Christmas lights, window film, power washing, deck restoration</li>
+  </ul>
+  <div class="speaker-note"><strong>TALK:</strong> "The reason I'm confident in this is because we've proved it works over and over. My partner Peter actively runs a home service business on pace to do over 1.5 million this year. Last year his business booked just over $180K from Facebook ads at a 14.4% marketing cost. Between Peter's business and our clients, we're actively managing a little over $2 million in home service revenue. I'm spending tens of thousands of dollars a month on ads on this very system. This has worked across window cleaning, gutter cleaning, arborists, concrete sealing, Christmas lights, window film, power washing, and deck restoration, just to name a few."</div>
+</div>
+
+<!-- SLIDE 7: AUDIT + CTA -->
+<div class="slide" id="s7">
+  <div class="logo">780 <span>Marketing</span></div>
+  <div class="slide-num">07</div>
+  <h2>Your Custom Audit Is <span class="accent">Below This Video</span></h2>
+  <ul class="list">
+    <li>Who's running ads in your market right now</li>
+    <li>Specific advantages that could make ads work well for your business</li>
+    <li>Estimated revenue numbers based on your average job size</li>
+  </ul>
+  <div class="highlight">
+    <p>If anything stands out, there's a calendar link at the bottom. Happy to walk through it with you. No pressure.</p>
+  </div>
+  <div class="speaker-note"><strong>TALK:</strong> "So your audit is right below this video. It covers who's running ads in your market right now, what specific advantages your business has that could make ads perform well, and the estimated revenue numbers based on your average job size. If anything in the audit stands out to you or you have questions about it, there's a calendar link at the bottom of the page. Happy to walk through it with you and talk through what it would look like for your business specifically."</div>
+</div>
+
+<button class="toggle-notes" onclick="document.body.classList.toggle('hide-notes');this.textContent=document.body.classList.contains('hide-notes')?'Show Notes':'Hide Notes';">Hide Notes</button>
+<div class="nav-hint">Arrow keys or click to navigate</div>
+
+<script>
+var current = 0;
+var slides = document.querySelectorAll('.slide');
+function show(n) {
+  slides[current].classList.remove('active');
+  current = (n + slides.length) % slides.length;
+  slides[current].classList.add('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+});
+document.addEventListener('click', function(e) {
+  if (e.clientX > window.innerWidth / 2) show(current + 1);
+  else show(current - 1);
+});
+</script>
+
+</body>
+</html>
