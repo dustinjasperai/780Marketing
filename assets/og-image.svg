@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#e8482e" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="#e8482e" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="gridmask" cx="60%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#000" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="gm">
+      <rect width="1200" height="630" fill="url(#gridmask)"/>
+    </mask>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0a0a0b"/>
+  <rect width="1200" height="630" fill="url(#grid)" mask="url(#gm)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Eyebrow dot + label -->
+  <g transform="translate(80, 130)">
+    <circle cx="7" cy="7" r="7" fill="#e8482e"/>
+    <text x="28" y="14" font-family="Archivo, system-ui, sans-serif" font-size="20" font-weight="600" fill="#a8a5a0" letter-spacing="4.4">PERFORMANCE MARKETING</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="80" y="260" font-family="Fraunces, Georgia, serif" font-size="84" font-weight="400" fill="#f4f1ec" letter-spacing="-2">We don't just run ads.</text>
+  <text x="80" y="350" font-family="Fraunces, Georgia, serif" font-size="84" font-weight="400" fill="#f4f1ec" letter-spacing="-2">We build the <tspan font-style="italic" fill="#e8482e">machine</tspan></text>
+  <text x="80" y="440" font-family="Fraunces, Georgia, serif" font-size="84" font-weight="400" fill="#f4f1ec" letter-spacing="-2">behind the revenue.</text>
+
+  <!-- Subline / divider -->
+  <line x1="80" y1="500" x2="180" y2="500" stroke="#e8482e" stroke-width="2"/>
+  <text x="200" y="508" font-family="Archivo, system-ui, sans-serif" font-size="22" font-weight="500" fill="#a8a5a0">First click to paying customer. One accountable system.</text>
+
+  <!-- Logo lockup bottom-left -->
+  <text x="80" y="580" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="600" fill="#f4f1ec">780 <tspan font-style="italic" fill="#e8482e">Marketing</tspan></text>
+
+  <!-- Stats top-right -->
+  <g transform="translate(1120, 130)" text-anchor="end">
+    <text font-family="Fraunces, Georgia, serif" font-size="44" font-weight="600" fill="#e8482e">$750K<tspan font-size="28" font-style="italic">+</tspan></text>
+    <text y="32" font-family="Archivo, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a8a5a0" letter-spacing="2.6">CLIENT REVENUE GENERATED</text>
+  </g>
+</svg>

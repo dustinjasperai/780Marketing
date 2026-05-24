@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies | 780 Marketing</title>
+<meta name="description" content="Real engagements, real systems, real numbers. Three full client-acquisition builds from 780 Marketing — healthcare education, career coaching, and weight-loss coaching.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://780marketing.ca/case-studies">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Case Studies | 780 Marketing">
+<meta property="og:description" content="Three full client-acquisition builds. Real engagements, real systems, real numbers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://780marketing.ca/case-studies">
+<meta property="og:image" content="https://780marketing.ca/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/case-study.css">
+<style>
+  /* index-specific */
+  .cs-index-hero{position:relative;padding:clamp(40px,6vw,72px) 0 clamp(40px,6vw,72px);overflow:hidden;}
+  .cs-index-hero::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 20%,#000,transparent 72%);
+    mask-image:radial-gradient(ellipse 80% 70% at 50% 20%,#000,transparent 72%);}
+  .cs-index-hero .wrap{position:relative;z-index:2;}
+  .cs-index-hero .eyebrow{margin-bottom:22px;}
+  .cs-index-hero h1{max-width:24ch;margin-bottom:24px;}
+  .cs-index-hero p{font-size:clamp(15px,1.3vw,18px);line-height:1.6;color:var(--paper-dim);max-width:60ch;}
+
+  .cs-list{padding:clamp(24px,4vw,48px) 0 clamp(80px,10vw,120px);display:flex;flex-direction:column;gap:clamp(20px,2.4vw,28px);}
+  .cs-list-card{
+    display:grid;grid-template-columns:.42fr .58fr;gap:clamp(28px,4vw,56px);
+    background:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:clamp(34px,3.6vw,48px);
+    text-decoration:none;color:inherit;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s ease,background .4s ease;
+  }
+  .cs-list-card:hover{transform:translateY(-4px);border-color:rgba(232,72,46,.32);background:var(--ink-3);}
+  .cs-list-card::after{content:"";position:absolute;top:0;right:0;width:340px;height:340px;
+    background:radial-gradient(circle at 80% 20%,var(--red-glow),transparent 65%);opacity:0;transition:opacity .4s ease;pointer-events:none;}
+  .cs-list-card:hover::after{opacity:1;}
+
+  .csl-left{display:flex;flex-direction:column;gap:18px;justify-content:space-between;}
+  .csl-tag{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-mute);}
+  .csl-metric{font-family:var(--serif);font-weight:500;letter-spacing:-.03em;line-height:1;color:var(--red);font-size:clamp(42px,5vw,72px);}
+  .csl-metric .small{font-size:.42em;}
+  .csl-sub{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim);}
+
+  .csl-right{display:flex;flex-direction:column;gap:16px;}
+  .csl-right h2{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.4vw,30px);
+    line-height:1.18;letter-spacing:-.02em;color:var(--paper);}
+  .csl-right h2 em{font-style:italic;color:var(--red);}
+  .csl-right p{font-size:14.5px;line-height:1.62;color:var(--paper-dim);max-width:52ch;}
+  .csl-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .csl-pill{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-mute);
+    padding:6px 14px;border:1px solid var(--line);border-radius:100px;}
+  .csl-cta{margin-top:auto;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-mute);
+    display:inline-flex;align-items:center;gap:8px;transition:color .35s ease,gap .35s ease;}
+  .cs-list-card:hover .csl-cta{color:var(--red);}
+  .cs-list-card:hover .csl-arrow{transform:translateX(4px);}
+  .csl-arrow{transition:transform .35s ease;}
+
+  @media(max-width:760px){
+    .cs-list-card{grid-template-columns:1fr;gap:24px;}
+    .csl-left{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px;}
+    .csl-metric{font-size:clamp(34px,9vw,52px);}
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Case Studies — 780 Marketing",
+  "url": "https://780marketing.ca/case-studies",
+  "description": "Three full client-acquisition system builds from 780 Marketing.",
+  "isPartOf": { "@type": "WebSite", "name": "780 Marketing", "url": "https://780marketing.ca" },
+  "hasPart": [
+    { "@type": "Article", "headline": "A repeatable acquisition system for a healthcare agency coaching business", "url": "https://780marketing.ca/case-studies/passive-workforce" },
+    { "@type": "Article", "headline": "From a single Calendly link to a system that scales", "url": "https://780marketing.ca/case-studies/matthew-farquhar" },
+    { "@type": "Article", "headline": "From a Facebook group to a $15K-per-day webinar funnel", "url": "https://780marketing.ca/case-studies/weight-loss-coaching" }
+  ]
+}
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="/" class="logo">780 <span class="mk">Marketing</span></a>
+  <a href="/" class="back">&larr; <span>Home</span></a>
+</nav>
+
+<header class="cs-index-hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow dark"><span class="dot"></span>Case Studies</div>
+    <h1>Real systems. <em>Real numbers.</em></h1>
+    <p>Three full client-acquisition builds, end to end — the offer, the funnel, the ads, the CRM, the tracking. Every engagement starts with a financial model. Every build is owned and accountable.</p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="cs-list">
+
+    <a class="cs-list-card" href="/case-studies/weight-loss-coaching">
+      <div class="csl-left">
+        <span class="csl-tag">Health &amp; Wellness</span>
+        <div>
+          <div class="csl-metric">$15K<span class="small">/day</span></div>
+          <div class="csl-sub">Revenue at peak</div>
+        </div>
+        <span class="csl-cta">Read the case study <span class="csl-arrow">&rarr;</span></span>
+      </div>
+      <div class="csl-right">
+        <h2>From a Facebook group to a <em>$15K-per-day</em> webinar funnel.</h2>
+        <p>A registered dietitian relying on referrals and manual social media outreach. 780 Marketing rebuilt acquisition around a paid-ads webinar funnel — and the first event scaled past $15K per day in revenue.</p>
+        <div class="csl-pills">
+          <span class="csl-pill">Webinar Funnel</span>
+          <span class="csl-pill">Meta Ads</span>
+          <span class="csl-pill">Email + SMS</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="cs-list-card" href="/case-studies/matthew-farquhar">
+      <div class="csl-left">
+        <span class="csl-tag">Career Coaching</span>
+        <div>
+          <div class="csl-metric">$20K &rarr; $50K<span class="small">/mo</span></div>
+          <div class="csl-sub">Monthly revenue growth</div>
+        </div>
+        <span class="csl-cta">Read the case study <span class="csl-arrow">&rarr;</span></span>
+      </div>
+      <div class="csl-right">
+        <h2>From a single Calendly link to a <em>system that scales</em>.</h2>
+        <p>A career-coaching consultant running his whole business through a LinkedIn post and a booking link. 780 Marketing built the back-end system that more than doubled monthly revenue.</p>
+        <div class="csl-pills">
+          <span class="csl-pill">Book-a-Call Funnel</span>
+          <span class="csl-pill">Email Flows</span>
+          <span class="csl-pill">Tracking + Insights</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="cs-list-card" href="/case-studies/passive-workforce">
+      <div class="csl-left">
+        <span class="csl-tag">Healthcare Education</span>
+        <div>
+          <div class="csl-metric">$20K<span class="small">+/mo</span></div>
+          <div class="csl-sub">Added monthly revenue</div>
+        </div>
+        <span class="csl-cta">Read the case study <span class="csl-arrow">&rarr;</span></span>
+      </div>
+      <div class="csl-right">
+        <h2>A repeatable acquisition system for a <em>healthcare agency coaching</em> business.</h2>
+        <p>Passive Workforce teaches home care agency owners how to scale. 780 Marketing built the full webinar funnel, the ad creative, and the GoHighLevel CRM behind every lead — and made the engine repeatable.</p>
+        <div class="csl-pills">
+          <span class="csl-pill">Webinar Funnel</span>
+          <span class="csl-pill">Meta Ads</span>
+          <span class="csl-pill">GoHighLevel CRM</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<!-- ============ CTA ============ -->
+<section class="cs-cta">
+  <div class="fglow"></div>
+  <div class="wrap">
+    <div class="eyebrow dark"><span class="dot"></span>Let's Build Yours</div>
+    <h2>Want a system like this for <em>your business</em>?</h2>
+    <p>We'll walk through the results we've produced in your industry and map out projections for what your system would cost to implement.</p>
+    <a href="https://calendly.com/dustin-780copy/30min" class="btn" target="_blank" rel="noopener">
+      <span>Book a Strategy Call</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="/" class="logo">780 <span class="mk">Marketing</span></a>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="foot-col-label">Site</span>
+        <a href="/">Home</a>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/#testimonials">Client Feedback</a>
+        <a href="/#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <span class="foot-col-label">Start</span>
+        <a href="https://calendly.com/dustin-780copy/30min" target="_blank" rel="noopener">Book a Strategy Call</a>
+        <a href="mailto:dustin@780marketing.ca">dustin@780marketing.ca</a>
+      </div>
+      <div class="foot-col">
+        <span class="foot-col-label">Connect</span>
+        <a href="https://www.linkedin.com/in/dustin-jasper-224472221/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="foot-meta">Performance Marketing &middot; Calgary, AB</span>
+      <span class="foot-meta">&copy; 2026 780 Marketing. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

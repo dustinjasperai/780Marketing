@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/case-studies/abraham-anjarkouchian", "destination": "/case-studies/weight-loss-coaching", "permanent": true },
+    { "source": "/case-studies/passive-workforce.html", "destination": "/case-studies/passive-workforce", "permanent": true },
+    { "source": "/case-studies/matthew-farquhar.html", "destination": "/case-studies/matthew-farquhar", "permanent": true },
+    { "source": "/case-studies/weight-loss-coaching.html", "destination": "/case-studies/weight-loss-coaching", "permanent": true }
+  ]
+}
