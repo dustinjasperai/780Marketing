@@ -414,6 +414,26 @@
   .foot .logo{font-size:18px;}
   .foot-meta{font-size:12px;color:var(--paper-mute);letter-spacing:.04em;}
 
+  /* ============ ARTICLES ============ */
+  .arts{background:var(--ink);padding:clamp(88px,11vw,150px) 0;}
+  .arts-head{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;margin-bottom:48px;}
+  .arts .eyebrow{margin-bottom:22px;}
+  .arts .section-head{font-size:clamp(32px,3.8vw,52px);}
+  .arts .section-head em{font-style:italic;color:var(--red);}
+  .arts-all{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim);
+    text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .3s ease;white-space:nowrap;}
+  .arts-all:hover{color:var(--paper);}
+  .arts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .acard{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);border-radius:16px;
+    background:var(--ink-2);padding:28px 28px 26px;text-decoration:none;
+    transition:background .3s ease,border-color .3s ease,transform .3s cubic-bezier(.2,.8,.2,1);}
+  .acard:hover{background:var(--ink-3);border-color:rgba(232,72,46,.4);transform:translateY(-3px);}
+  .acard .ak{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);}
+  .acard h3{font-family:var(--serif);font-weight:400;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.015em;line-height:1.22;color:var(--paper);}
+  .acard p{font-size:13.5px;line-height:1.6;color:var(--paper-dim);}
+  .acard .am{margin-top:auto;padding-top:10px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--paper-mute);transition:color .3s ease;}
+  .acard:hover .am{color:var(--paper-dim);}
+
   /* ============ RESPONSIVE ============ */
   @media(max-width:980px){
     .hero-grid{grid-template-columns:1fr;gap:48px;padding-top:8px;}
@@ -430,6 +450,8 @@
     .sec-intro,.about-grid,.ind-inner,.results-head{grid-template-columns:1fr;}
     .results-head{align-items:start;}
     .results-head .note{text-align:left;}
+    .arts-grid{grid-template-columns:1fr;}
+    .arts-head{grid-template-columns:1fr;align-items:start;}
   }
   @media(max-width:560px){
     .nav-cta{display:none;}
@@ -848,6 +870,40 @@
   </div>
 </section>
 
+<!-- ============ ARTICLES ============ -->
+<section class="arts" id="articles">
+  <div class="wrap">
+    <div class="arts-head">
+      <div class="reveal">
+        <div class="eyebrow dark"><span class="dot"></span>From the Articles</div>
+        <h2 class="section-head">The numbers behind the <em>system</em>.</h2>
+      </div>
+      <a href="/articles" class="arts-all reveal" data-d="1">Browse all articles &rarr;</a>
+    </div>
+
+    <div class="arts-grid">
+      <a class="acard reveal" data-d="1" href="/articles/cost-per-booked-call-benchmarks/">
+        <span class="ak">Benchmarks</span>
+        <h3>Cost Per Booked Call Benchmarks for High-Ticket Coaches</h3>
+        <p>Real campaign data: what qualified registrations, show rates, and booked sales calls actually cost.</p>
+        <span class="am">Read the data &rarr;</span>
+      </a>
+      <a class="acard reveal" data-d="2" href="/articles/why-your-facebook-ads-didnt-work-coaching/">
+        <span class="ak">Diagnostics</span>
+        <h3>Why Your Facebook Ads Didn't Work for Your Coaching Business</h3>
+        <p>12 fixable reasons campaigns fail, and how to tell whether the problem was the ads or everything after the click.</p>
+        <span class="am">Run the diagnostic &rarr;</span>
+      </a>
+      <a class="acard reveal" data-d="3" href="/articles/marketing-agency-cost-coaches/">
+        <span class="ak">Pricing</span>
+        <h3>What a Marketing Agency Really Costs for Coaches &amp; Consultants</h3>
+        <p>Industry retainer ranges, hidden costs, red flags, and our own pricing disclosed as one data point.</p>
+        <span class="am">See the ranges &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FINAL CTA ============ -->
 <section class="final" id="contact">
   <div class="fglow"></div>
@@ -872,6 +928,7 @@
         <span class="foot-col-label">Site</span>
         <a href="/">Home</a>
         <a href="/case-studies">Case Studies</a>
+        <a href="/articles">Articles</a>
         <a href="#testimonials">Client Feedback</a>
         <a href="#faq">FAQ</a>
       </div>
