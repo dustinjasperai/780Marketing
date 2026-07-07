@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Showcase Views — 780</title>
+<style>
+  :root{ --bg:#0f1216; --card:#171b21; --line:#262c35; --text:#e7ecf2; --muted:#8b95a3; --accent:#5ec27a; --warn:#e0a94a; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  header{ padding:20px 24px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  h1{ font-size:18px; margin:0; font-weight:650; }
+  .muted{ color:var(--muted); }
+  .wrap{ padding:20px 24px; max-width:1200px; margin:0 auto; }
+  .stats{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
+  .stat{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; min-width:120px; }
+  .stat .n{ font-size:24px; font-weight:700; }
+  .stat .l{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  input,select,button{ background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font:inherit; }
+  button{ cursor:pointer; }
+  label.chk{ display:flex; align-items:center; gap:6px; color:var(--muted); cursor:pointer; }
+  table{ width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+  th{ color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.03em; position:sticky; top:0; background:var(--card); }
+  tr:last-child td{ border-bottom:none; }
+  .pill{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+  .pill.engaged{ background:rgba(94,194,122,.15); color:var(--accent); }
+  .pill.load{ background:rgba(139,149,163,.15); color:var(--muted); }
+  .pill.bot{ background:rgba(224,169,74,.15); color:var(--warn); }
+  .name{ font-weight:600; }
+  .sub{ color:var(--muted); font-size:12px; }
+  .empty{ text-align:center; padding:48px; color:var(--muted); }
+  .grouped th:first-child{ width:34%; }
+  a{ color:var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>👀 Showcase Views</h1>
+  <span class="muted" id="updated"></span>
+  <span style="margin-left:auto" class="muted">auto-refresh 30s</span>
+</header>
+<div class="wrap">
+  <div id="needkey" style="display:none">
+    <p>Add your dashboard key to the URL: <code>showcase-views#key=YOUR_KEY</code></p>
+    <div class="controls">
+      <input id="keyin" placeholder="dashboard key" style="min-width:280px">
+      <button onclick="setKey()">Open</button>
+    </div>
+  </div>
+
+  <div id="main" style="display:none">
+    <div class="stats" id="stats"></div>
+    <div class="controls">
+      <input id="search" placeholder="filter by prospect…" oninput="render()" style="min-width:220px">
+      <label class="chk"><input type="checkbox" id="engagedOnly" checked onchange="render()"> engaged only</label>
+      <label class="chk"><input type="checkbox" id="hideBots" checked onchange="render()"> hide bots</label>
+      <select id="view" onchange="render()">
+        <option value="grouped">Grouped by prospect</option>
+        <option value="timeline">Timeline (every hit)</option>
+      </select>
+      <button onclick="load()">Refresh now</button>
+    </div>
+    <div id="tablewrap"></div>
+  </div>
+</div>
+
+<script>
+var KEY = "";
+var DATA = [];
+
+function getKeyFromHash(){
+  var m = (location.hash||"").match(/key=([^&]+)/);
+  return m ? decodeURIComponent(m[1]) : "";
+}
+function setKey(){
+  var v = document.getElementById("keyin").value.trim();
+  if(!v) return;
+  location.hash = "key=" + encodeURIComponent(v);
+  KEY = v; boot();
+}
+function fmt(iso){
+  try{ var d = new Date(iso); return d.toLocaleString(); }catch(e){ return iso; }
+}
+function ago(iso){
+  var s = (Date.now() - new Date(iso).getTime())/1000;
+  if(s<60) return Math.floor(s)+"s ago";
+  if(s<3600) return Math.floor(s/60)+"m ago";
+  if(s<86400) return Math.floor(s/3600)+"h ago";
+  return Math.floor(s/86400)+"d ago";
+}
+
+async function load(){
+  try{
+    var r = await fetch("/api/views?key=" + encodeURIComponent(KEY) + "&limit=1000", {cache:"no-store"});
+    if(r.status===401){ showNeedKey("Key rejected."); return; }
+    var j = await r.json();
+    DATA = j.rows || [];
+    document.getElementById("updated").textContent = "updated " + new Date().toLocaleTimeString();
+    render();
+  }catch(e){ /* keep last render */ }
+}
+
+function activeRows(){
+  var engagedOnly = document.getElementById("engagedOnly").checked;
+  var hideBots = document.getElementById("hideBots").checked;
+  var q = document.getElementById("search").value.trim().toLowerCase();
+  return DATA.filter(function(v){
+    if(hideBots && v.is_bot) return false;
+    if(engagedOnly && v.event !== "engaged") return false;
+    if(q && !((v.name||"").toLowerCase().includes(q) || (v.slug||"").toLowerCase().includes(q))) return false;
+    return true;
+  });
+}
+
+function render(){
+  var rows = activeRows();
+  // stats
+  var uniqProspects = {}, todayCount = 0, engagedCount = 0;
+  var todayStart = new Date(); todayStart.setHours(0,0,0,0);
+  rows.forEach(function(v){
+    uniqProspects[v.slug] = true;
+    if(v.event==="engaged") engagedCount++;
+    if(new Date(v.created_at) >= todayStart) todayCount++;
+  });
+  document.getElementById("stats").innerHTML =
+    stat(rows.length, "views shown") +
+    stat(Object.keys(uniqProspects).length, "prospects") +
+    stat(engagedCount, "engaged") +
+    stat(todayCount, "today");
+
+  var view = document.getElementById("view").value;
+  document.getElementById("tablewrap").innerHTML = view==="grouped" ? grouped(rows) : timeline(rows);
+}
+function stat(n,l){ return '<div class="stat"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+
+function grouped(rows){
+  if(!rows.length) return emptyMsg();
+  var by = {};
+  rows.forEach(function(v){
+    var k = v.slug;
+    if(!by[k]) by[k] = { name:v.name, slug:v.slug, vertical:v.vertical, count:0, last:v.created_at, places:{} };
+    by[k].count++;
+    if(new Date(v.created_at) > new Date(by[k].last)) by[k].last = v.created_at;
+    var where = [v.city, v.country].filter(Boolean).join(", ");
+    if(where) by[k].places[where] = true;
+  });
+  var list = Object.values(by).sort(function(a,b){ return new Date(b.last) - new Date(a.last); });
+  var out = '<table class="grouped"><thead><tr><th>Prospect</th><th>Views</th><th>Last seen</th><th>Location</th></tr></thead><tbody>';
+  list.forEach(function(g){
+    out += '<tr><td><div class="name">'+esc(g.name)+'</div><div class="sub">'+esc(g.slug)+(g.vertical?' · '+esc(g.vertical):'')+'</div></td>'+
+      '<td>'+g.count+'</td>'+
+      '<td>'+ago(g.last)+'<div class="sub">'+fmt(g.last)+'</div></td>'+
+      '<td>'+esc(Object.keys(g.places).join(" · ")||'—')+'</td></tr>';
+  });
+  return out + '</tbody></table>';
+}
+
+function timeline(rows){
+  if(!rows.length) return emptyMsg();
+  var out = '<table><thead><tr><th>When</th><th>Prospect</th><th>Event</th><th>Location</th><th>From</th></tr></thead><tbody>';
+  rows.forEach(function(v){
+    var where = [v.city, v.region, v.country].filter(Boolean).join(", ");
+    var pill = v.is_bot ? '<span class="pill bot">bot</span>' : '<span class="pill '+(v.event==="engaged"?"engaged":"load")+'">'+esc(v.event)+'</span>';
+    out += '<tr><td>'+ago(v.created_at)+'<div class="sub">'+fmt(v.created_at)+'</div></td>'+
+      '<td><div class="name">'+esc(v.name)+'</div><div class="sub">'+esc(v.slug)+'</div></td>'+
+      '<td>'+pill+'</td>'+
+      '<td>'+esc(where||'—')+'</td>'+
+      '<td class="sub">'+esc(v.referrer||'direct')+'</td></tr>';
+  });
+  return out + '</tbody></table>';
+}
+function emptyMsg(){ return '<div class="empty">No views match the current filters yet.</div>'; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+function showNeedKey(msg){
+  document.getElementById("main").style.display="none";
+  document.getElementById("needkey").style.display="block";
+  if(msg) document.getElementById("needkey").querySelector("p").textContent = msg + " Add your dashboard key: showcase-views#key=YOUR_KEY";
+}
+function boot(){
+  document.getElementById("needkey").style.display="none";
+  document.getElementById("main").style.display="block";
+  load();
+}
+
+KEY = getKeyFromHash();
+if(KEY){ boot(); } else { showNeedKey(); }
+setInterval(function(){ if(KEY) load(); }, 30000);
+</script>
+</body>
+</html>
