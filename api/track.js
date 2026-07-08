@@ -56,8 +56,12 @@ module.exports = async function handler(req, res) {
   // Alert only on a genuine engaged view from a human — cuts prefetch/scanner noise.
   // (Scanners generally don't run JS at all, so 'engaged' rarely fires for them; the
   //  bot check + event gate are belt-and-suspenders.)
+  // NOTE: we AWAIT the alert before responding. On Vercel the function can freeze the
+  // instant the response is sent, killing any un-awaited background fetch — a
+  // fire-and-forget notify() would silently never deliver. The try/catch keeps a
+  // failed alert from ever turning into a non-200 that breaks the showcase.
   if (ev === "engaged" && !isBot) {
-    notify(row).catch(() => {});
+    try { await notify(row); } catch (e) { /* never block the pixel */ }
   }
 
   // Return a 1x1 transparent GIF so an <img> fallback works and nothing renders.
