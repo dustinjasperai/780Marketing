@@ -29,6 +29,7 @@
   .pill.engaged{ background:rgba(94,194,122,.15); color:var(--accent); }
   .pill.load{ background:rgba(139,149,163,.15); color:var(--muted); }
   .pill.bot{ background:rgba(224,169,74,.15); color:var(--warn); }
+  .pill.mine{ background:rgba(139,149,163,.15); color:var(--muted); margin-left:6px; }
   .name{ font-weight:600; }
   .sub{ color:var(--muted); font-size:12px; }
   .empty{ text-align:center; padding:48px; color:var(--muted); }
@@ -57,6 +58,7 @@
       <input id="search" placeholder="filter by prospect…" oninput="render()" style="min-width:220px">
       <label class="chk"><input type="checkbox" id="engagedOnly" checked onchange="render()"> engaged only</label>
       <label class="chk"><input type="checkbox" id="hideBots" checked onchange="render()"> hide bots</label>
+      <label class="chk" title="Hits from my own location (MUTE_LOCATIONS — Okotoks by default). Still logged, never alerted."><input type="checkbox" id="hideMine" checked onchange="render()"> hide my views</label>
       <select id="view" onchange="render()">
         <option value="grouped">Grouped by prospect</option>
         <option value="timeline">Timeline (every hit)</option>
@@ -106,9 +108,11 @@ async function load(){
 function activeRows(){
   var engagedOnly = document.getElementById("engagedOnly").checked;
   var hideBots = document.getElementById("hideBots").checked;
+  var hideMine = document.getElementById("hideMine").checked;
   var q = document.getElementById("search").value.trim().toLowerCase();
   return DATA.filter(function(v){
     if(hideBots && v.is_bot) return false;
+    if(hideMine && v.self_view) return false;
     if(engagedOnly && v.event !== "engaged") return false;
     if(q && !((v.name||"").toLowerCase().includes(q) || (v.slug||"").toLowerCase().includes(q))) return false;
     return true;
@@ -164,6 +168,7 @@ function timeline(rows){
   rows.forEach(function(v){
     var where = [v.city, v.region, v.country].filter(Boolean).join(", ");
     var pill = v.is_bot ? '<span class="pill bot">bot</span>' : '<span class="pill '+(v.event==="engaged"?"engaged":"load")+'">'+esc(v.event)+'</span>';
+    if(v.self_view) pill += '<span class="pill mine" title="matched MUTE_LOCATIONS — no alert was sent">me</span>';
     out += '<tr><td>'+ago(v.created_at)+'<div class="sub">'+fmt(v.created_at)+'</div></td>'+
       '<td><div class="name">'+esc(v.name)+'</div><div class="sub">'+esc(v.slug)+'</div></td>'+
       '<td>'+pill+'</td>'+

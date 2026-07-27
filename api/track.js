@@ -11,13 +11,112 @@
 //   RESEND_API_KEY           re_...                           (optional — enables email alerts)
 //   ALERT_EMAIL              where alerts go                  (optional — paired with RESEND_API_KEY)
 //   ALERT_FROM_EMAIL         verified Resend sender           (optional — defaults to onboarding@resend.dev)
+//   MUTE_IPS                 my IPs / prefixes, comma-sep     (optional — those hits are dropped entirely)
+//   MUTE_LOCATIONS           my towns, ";"-separated          (optional — defaults to Okotoks, AB, CA;
+//                                                              those hits are logged but never alerted)
 //
 // Nothing is required for the endpoint to return 200; missing config just
 // disables that piece. This keeps a broken env var from ever blocking a page.
 
 const BOT_RE = /bot|crawler|spider|crawl|facebookexternalhit|whatsapp|slackbot|telegrambot|linkedinbot|discordbot|twitterbot|google-read-aloud|bingpreview|preview|pinterest|redditbot|embedly|applebot|headlesschrome|phantom|python-requests|axios|curl|wget|go-http|node-fetch|lighthouse|gtmetrix|pingdom|uptimerobot/i;
 
+// A view is treated as "mine" — never logged, never alerted — if ANY of:
+//   1. the visitor's IP matches an entry in the MUTE_IPS env var (comma-separated), or
+//   2. the page URL carries a mute flag: ?self  (also #self / ?mute / ?780self), or
+//   3. the browser carries the mute cookie we set the first time it used ?self.
+// The URL flag works from any device/network with no redeploy, because the
+// beacon already forwards the full location.href to us as `u`. The value is
+// optional, so ?self, ?self=1 and #self all count.
+const SELF_RE = /[?&#](self|mute|780self)(=[^&#]*)?(?=[&#]|$)/i;
+
+// Views from my own town are treated as mine for ALERTING only: they are still
+// logged (so a real prospect who happens to sit in the same town is never lost
+// — the dashboard just files the hit under "my views"), but they never ping my
+// phone. Vercel hands us the geo headers for free, so this costs nothing, needs
+// no extra service, and covers every device and network at that location —
+// unlike MUTE_IPS (breaks when the ISP rotates the address) or the ?self cookie
+// (covers only the one browser that used the flag).
+//
+// MUTE_LOCATIONS format — entries separated by ";" or newlines, each entry
+// "City", "City, Region" or "City, Region, Country" ("/" works instead of the
+// comma). "*" wildcards a part, so "*, AB" mutes all of Alberta. Region is the
+// short code Vercel sends ("AB"), country is the 2-letter code ("CA").
+// Set the env var to "none" to turn location muting off entirely.
+const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA";
+
 function firstStr(v) { return Array.isArray(v) ? v[0] : v; }
+
+function norm(v) { return String(v == null ? "" : v).trim().toLowerCase(); }
+
+// x-vercel-ip-country-region is documented as the bare ISO 3166-2 subdivision
+// ("AB"), but some edges send it country-prefixed ("CA-AB"). Accept either so a
+// header-format change can't quietly switch my own alerts back on.
+function normRegion(v) { return norm(v).split("-").pop(); }
+
+function geoMuted(city, region, country) {
+  const raw = process.env.MUTE_LOCATIONS;
+  const spec = raw && raw.trim() ? raw : DEFAULT_MUTE_LOCATIONS;
+  if (norm(spec) === "none" || norm(spec) === "off") return false;
+  // An absent geo header (norm → "") can never equal a configured value, so a
+  // hit we can't place stays un-muted and still alerts. Fail toward noticing.
+  const have = [norm(city), normRegion(region), norm(country)];
+  return spec
+    .split(/[;\n]/).map((s) => s.trim()).filter(Boolean)
+    .some((entry) => {
+      const parts = entry.split(/[,/]/).map(norm).filter(Boolean);
+      if (!parts.length || parts.length > have.length) return false;
+      return parts.every((want, i) => want === "*" || want === have[i]);
+    });
+}
+
+// Match the visitor IP against MUTE_IPS. Each entry is either an exact IP, or a
+// prefix ending in "." or "*" — so "73.15." (or "73.15.*") mutes any 73.15.x.y.
+// The prefix form lets a home/office IP whose last octet drifts stay muted.
+function ipMuted(ip) {
+  if (!ip) return false;
+  const list = (process.env.MUTE_IPS || "")
+    .split(",").map((s) => s.trim()).filter(Boolean);
+  for (const entry of list) {
+    if (entry.endsWith("*")) {
+      if (ip.startsWith(entry.slice(0, -1))) return true;
+    } else if (entry.endsWith(".")) {
+      if (ip.startsWith(entry)) return true;
+    } else if (ip === entry) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Once a browser has visited with ?self, we drop a cookie on the tracker's own
+// domain. Every later beacon carries it back, so that browser stays muted on
+// every showcase without having to append ?self again.
+//
+// Scoped to .780marketing.ca (not just this exact host) because showcases now
+// live at packages.780marketing.ca — same registrable domain as the collector,
+// so the browser treats the beacon as SAME-SITE and the cookie survives the
+// third-party-cookie blocking that made this unreliable back when showcases
+// were on *.surge.sh. It also spans apex → www (the apex 307-redirects to www).
+// On any other host (e.g. a *.vercel.app preview) we omit Domain — a browser
+// rejects a cookie domain it isn't under, which would silently drop the mute.
+function hasMuteCookie(req) {
+  return /(?:^|;\s*)s780=1(?:;|$)/.test(req.headers.cookie || "");
+}
+
+function muteCookie(req) {
+  const host = String(firstStr(req.headers["x-forwarded-host"]) || req.headers.host || "")
+    .split(":")[0].toLowerCase();
+  const scoped = host === "780marketing.ca" || host.endsWith(".780marketing.ca");
+  return "s780=1; Max-Age=31536000; Path=/" +
+    (scoped ? "; Domain=.780marketing.ca" : "") +
+    "; SameSite=None; Secure";
+}
+
+function urlSelf(pageUrl) { return !!pageUrl && SELF_RE.test(pageUrl); }
+
+function isMuted(req, ip, pageUrl) {
+  return ipMuted(ip) || urlSelf(pageUrl) || hasMuteCookie(req);
+}
 
 module.exports = async function handler(req, res) {
   // CORS — showcases live on *.surge.sh, a different origin
@@ -50,6 +149,21 @@ module.exports = async function handler(req, res) {
     country, region, city, is_bot: isBot, created_at: nowIso,
   };
 
+  // My own views — skip logging AND alerting entirely, then return the pixel.
+  // Nothing about the showcase changes; it just doesn't "register" my visit.
+  if (isMuted(req, ip, pageUrl)) {
+    // First time this browser used ?self, remember it so future visits to any
+    // showcase are muted automatically (1-year first-party cookie on this origin).
+    if (urlSelf(pageUrl)) {
+      res.setHeader("Set-Cookie", muteCookie(req));
+    }
+    const gif = Buffer.from("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", "base64");
+    res.setHeader("Content-Type", "image/gif");
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    res.status(200).send(gif);
+    return;
+  }
+
   // Persist (fire-and-forget so logging never blocks the response)
   logToSupabase(row).catch(() => {});
 
@@ -60,7 +174,8 @@ module.exports = async function handler(req, res) {
   // instant the response is sent, killing any un-awaited background fetch — a
   // fire-and-forget notify() would silently never deliver. The try/catch keeps a
   // failed alert from ever turning into a non-200 that breaks the showcase.
-  if (ev === "engaged" && !isBot) {
+  // A hit from my own town is logged above but never alerted (see MUTE_LOCATIONS).
+  if (ev === "engaged" && !isBot && !geoMuted(city, region, country)) {
     try { await notify(row); } catch (e) { /* never block the pixel */ }
   }
 
