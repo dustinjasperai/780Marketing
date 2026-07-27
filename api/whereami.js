@@ -11,7 +11,7 @@
 //
 // Env: MUTE_LOCATIONS / MUTE_IPS — same vars and format as api/track.js.
 
-const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA";
+const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA; Edmonton, AB, CA";
 
 function firstStr(v) { return Array.isArray(v) ? v[0] : v; }
 function norm(v) { return String(v == null ? "" : v).trim().toLowerCase(); }
@@ -49,13 +49,25 @@ module.exports = async function handler(req, res) {
   const region = req.headers["x-vercel-ip-country-region"] || "";
   const country = req.headers["x-vercel-ip-country"] || "";
 
-  const byLocation = geoMuted(city, region, country);
+  // Ask about a town you are NOT sitting in: /api/whereami?city=Edmonton&region=AB&country=CA
+  // This is how you confirm a MUTE_LOCATIONS change actually took effect in
+  // production — the deployed default and a Vercel env var can disagree, and
+  // without this you'd only find out by waiting for an unwanted alert.
+  const q = req.query || {};
+  const simCity = firstStr(q.city), simRegion = firstStr(q.region), simCountry = firstStr(q.country);
+  const simulated = !!(simCity || simRegion || simCountry);
+  const askCity = simulated ? (simCity || "") : city;
+  const askRegion = simulated ? (simRegion || "") : region;
+  const askCountry = simulated ? (simCountry || "") : country;
+
+  const byLocation = geoMuted(askCity, askRegion, askCountry);
   const byIp = ipMuted(ip);
   const byCookie = /(?:^|;\s*)s780=1(?:;|$)/.test(req.headers.cookie || "");
 
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Cache-Control", "no-store");
-  res.status(200).json({
+  const verdict = byLocation || byIp || byCookie ? "stay quiet" : "alert you";
+  const out = {
     vercel_sees: { city: city || null, region: region || null, country: country || null, ip: ip || null },
     muted_by: {
       location: byLocation,   // MUTE_LOCATIONS matched → logged, but no alert
@@ -64,6 +76,15 @@ module.exports = async function handler(req, res) {
     },
     // Plain-language bottom line. If this says "alert" while you're at home, copy
     // the city above into MUTE_LOCATIONS in Vercel — your IP places you elsewhere.
-    a_view_from_here_would: byLocation || byIp || byCookie ? "stay quiet" : "alert you",
-  });
+    a_view_from_here_would: verdict,
+  };
+  // Never let a simulated answer be mistaken for a real one: say so, echo what
+  // was asked, and drop the "from here" phrasing (only `location` was simulated —
+  // the cookie and IP checks still reflect this actual request).
+  if (simulated) {
+    delete out.a_view_from_here_would;
+    out.simulated_check = { city: askCity || null, region: askRegion || null, country: askCountry || null };
+    out.a_view_from_there_would = verdict;
+  }
+  res.status(200).json(out);
 };

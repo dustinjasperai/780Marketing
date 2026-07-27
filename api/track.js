@@ -12,7 +12,7 @@
 //   ALERT_EMAIL              where alerts go                  (optional — paired with RESEND_API_KEY)
 //   ALERT_FROM_EMAIL         verified Resend sender           (optional — defaults to onboarding@resend.dev)
 //   MUTE_IPS                 my IPs / prefixes, comma-sep     (optional — those hits are dropped entirely)
-//   MUTE_LOCATIONS           my towns, ";"-separated          (optional — defaults to Okotoks, AB, CA;
+//   MUTE_LOCATIONS           my towns, ";"-separated          (optional — defaults to Okotoks + Edmonton, AB;
 //                                                              those hits are logged but never alerted)
 //
 // Nothing is required for the endpoint to return 200; missing config just
@@ -42,7 +42,7 @@ const SELF_RE = /[?&#](self|mute|780self)(=[^&#]*)?(?=[&#]|$)/i;
 // comma). "*" wildcards a part, so "*, AB" mutes all of Alberta. Region is the
 // short code Vercel sends ("AB"), country is the 2-letter code ("CA").
 // Set the env var to "none" to turn location muting off entirely.
-const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA";
+const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA; Edmonton, AB, CA";
 
 function firstStr(v) { return Array.isArray(v) ? v[0] : v; }
 

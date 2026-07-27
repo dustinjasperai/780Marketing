@@ -59,7 +59,7 @@ Email (via Resend):
 Muting your own views (all optional — sensible defaults are built in):
 | Var | Value |
 |-----|-------|
-| `MUTE_LOCATIONS` | Towns whose views never alert you. **Defaults to `Okotoks, AB, CA`** — nothing to set unless you move or want to add a town. Separate entries with `;`, e.g. `Okotoks, AB, CA; High River, AB, CA`. `*` wildcards a part (`*, AB, CA` = all of Alberta). Set it to `none` to alert on everything again. |
+| `MUTE_LOCATIONS` | Towns whose views never alert you. **Defaults to `Okotoks, AB, CA; Edmonton, AB, CA`** — nothing to set unless you move or want another town. Separate entries with `;`. `*` wildcards a part (`*, AB, CA` = all of Alberta). Set it to `none` to alert on everything again. ⚠️ Setting this var **replaces** the default rather than adding to it — include Okotoks and Edmonton in the value if you still want them. |
 | `MUTE_IPS` | Your IPs, comma-separated. Views from them are dropped completely (not even logged). A prefix works: `73.15.` or `73.15.*` covers a home IP whose last octet drifts. |
 
 > Use `printf` not `echo` if setting via CLI (`vercel env add`) — echo appends a newline that breaks token comparisons.
@@ -91,7 +91,8 @@ Then open `https://780marketing.ca/showcase-views#key=YOUR_DASHBOARD_KEY`. A tes
 - **Where showcases live:** `packages.780marketing.ca/<slug>` (Vercel project `780-showcase-pages`, deployed by `Scripts/utilities/deploy_showcase.sh`). Surge is retired. The beacon always posts to `780marketing.ca/api/track`, so hosting never affects tracking — and since the pages are now a subdomain of the collector's own domain, the `?self` mute cookie is same-site and no longer at the mercy of third-party-cookie blocking.
 - **Bot filtering:** JS-based beacon (scanners rarely run JS) + a user-agent bot list + the 5s-visible engaged gate. Expect very little noise.
 - **Your own views** — three independent ways, so opening a showcase yourself never looks like a prospect:
-  1. **By location (`MUTE_LOCATIONS`, on by default for Okotoks, AB)** — no alert is sent, but the hit **is still logged**, and the dashboard tags it `me` and hides it under the "hide my views" checkbox (on by default). Logging rather than discarding means a genuine prospect who happens to be in Okotoks is never invisible — untick the box and you'll see them. Works from any device or network in town, with no setup.
+  1. **By location (`MUTE_LOCATIONS`, on by default for Okotoks + Edmonton, AB)** — no alert is sent, but the hit **is still logged**, and the dashboard tags it `me` and hides it under the "hide my views" checkbox (on by default). Logging rather than discarding is what keeps this safe: **Edmonton is a real market for you** (it's the 780 in the name), so a genuine Edmonton prospect's view won't ping your phone — but it's never lost. Untick the box and it's there. Works from any device or network in those cities, with no setup.
+     **Check any city:** `/api/whereami` says whether a view from where you are now would alert you; add `?city=Edmonton&region=AB&country=CA` (all three) to test a city you're not in — that's how you confirm a `MUTE_LOCATIONS` change actually took effect in production.
   2. **`?self` on the URL** (also `#self` / `?mute`) — drops the hit entirely and sets a 1-year cookie, so that browser stays muted on every showcase afterwards. Use this when you're travelling or on cell data, where the location won't match.
   3. **`MUTE_IPS`** — drops the hit entirely by IP. Most precise, but breaks when your ISP rotates your address.
 - **New showcases:** run the injector, then `bash Scripts/utilities/deploy_showcase.sh <prospect-folder> <slug>`. The snippet auto-derives slug/name/vertical.

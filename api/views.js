@@ -14,7 +14,7 @@ function firstStr(v) { return Array.isArray(v) ? v[0] : v; }
 // Kept in sync with api/track.js on purpose — these are zero-dependency
 // standalone functions with no shared module, but they read the SAME env var,
 // so MUTE_LOCATIONS stays the single place you configure this.
-const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA";
+const DEFAULT_MUTE_LOCATIONS = "Okotoks, AB, CA; Edmonton, AB, CA";
 
 function norm(v) { return String(v == null ? "" : v).trim().toLowerCase(); }
 function normRegion(v) { return norm(v).split("-").pop(); }  // "CA-AB" → "ab"
