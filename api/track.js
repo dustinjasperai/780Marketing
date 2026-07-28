@@ -203,10 +203,15 @@ async function logToSupabase(row) {
 
 async function notify(row) {
   const where = [row.city, row.region, row.country].filter(Boolean).join(", ");
-  const line = `👀 Showcase viewed — ${row.name}`;
+  const line = `🎥 ${row.name} viewed their showcase — send them a Tella video`;
+  // Script path only when we know the vertical (folder = Clients/Prospects/<vertical>/<slug>/)
+  const scriptPath = row.vertical
+    ? `Clients/Prospects/${row.vertical}/${row.slug}/tella-script.md`
+    : "";
   const detail =
     `Prospect: ${row.name} (${row.slug})` +
     (row.vertical ? `\nVertical: ${row.vertical}` : "") +
+    (scriptPath ? `\nScript: ${scriptPath}` : "") +
     (where ? `\nLocation: ${where}` : "") +
     (row.referrer ? `\nCame from: ${row.referrer}` : "") +
     (row.page_url ? `\nPage: ${row.page_url}` : "") +
