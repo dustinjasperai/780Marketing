@@ -265,13 +265,25 @@ module.exports = async function handler(req, res) {
 
   // Would this hit alert? Only then is the IP-owner lookup worth a network call.
   // (load/dwell events and already-flagged hits never alert, so never look up.)
-  let ipOrg = "", orgKnown = false;
+  let ipOrg = "", orgKnown = false, suspectOrg = false;
   const wouldAlert = ev === "engaged" && !botReason && !geoQuiet;
   if (wouldAlert && norm(process.env.DATACENTER_FILTER) !== "off") {
     const info = await lookupOrg(ip);
     orgKnown = info.ok;
     ipOrg = info.text;
-    if (orgKnown && orgClass(ipOrg) === "datacenter") botReason = "datacenter";
+    if (orgKnown && orgClass(ipOrg) === "datacenter") {
+      // A v2 beacon's ix=1 is independent proof of a human — scanners render
+      // pages but never scroll (that's the whole premise of v2). So when the
+      // org check says "datacenter" and the interaction check says "human",
+      // believe the human signal and alert TAGGED instead of going silent.
+      // Proven necessary 2026-08-11: Keith Lewis viewed his showcase and
+      // booked a call, and the only trace was silence — a real lead behind a
+      // datacenter-flagged IP is exactly who this alert exists to catch.
+      // A flagged v1 "engaged" carries no interaction proof and stays quiet
+      // (that is the Safe Links scanner case the filter was built for).
+      if (beaconVer >= 2 && interacted) suspectOrg = true;
+      else botReason = "datacenter";
+    }
   }
 
   const row = {
@@ -280,8 +292,14 @@ module.exports = async function handler(req, res) {
     country, region, city, is_bot: !!botReason, created_at: nowIso,
     // These two columns may not exist in older Supabase tables — logToSupabase
     // retries without them, so the insert can never be lost to the schema.
-    bot_reason: botReason || null, ip_org: ipOrg || null,
+    bot_reason: botReason || (suspectOrg ? "datacenter-suspect" : null),
+    ip_org: ipOrg || null,
   };
+
+  // Forensic trail in the Vercel function logs — the only queryable view
+  // record while Supabase is unconfigured (log retention is short, but it
+  // beats total silence; `vercel logs` can grep "showcase_view").
+  console.log("showcase_view " + JSON.stringify(row));
 
   // Persist (fire-and-forget so logging never blocks the response)
   logToSupabase(row).catch(() => {});
@@ -293,7 +311,7 @@ module.exports = async function handler(req, res) {
   // failed alert from ever turning into a non-200 that breaks the showcase.
   // A hit from my own town is logged above but never alerted (see MUTE_LOCATIONS).
   if (ev === "engaged" && !botReason && !geoQuiet) {
-    try { await notify(row, { orgKnown, orgText: ipOrg }); } catch (e) { /* never block the pixel */ }
+    try { await notify(row, { orgKnown, orgText: ipOrg, suspectOrg }); } catch (e) { /* never block the pixel */ }
   }
 
   // Return a 1x1 transparent GIF so an <img> fallback works and nothing renders.
@@ -331,7 +349,10 @@ async function logToSupabase(row) {
 
 async function notify(row, verdict) {
   const where = [row.city, row.region, row.country].filter(Boolean).join(", ");
-  const line = `🎥 ${row.name} viewed their showcase — send them a Tella video`;
+  const suspect = !!(verdict && verdict.suspectOrg);
+  const line = suspect
+    ? `⚠️🎥 ${row.name} viewed their showcase (datacenter-flagged IP, but they really scrolled)`
+    : `🎥 ${row.name} viewed their showcase — send them a Tella video`;
   // Script path only when we know the vertical (folder = Clients/Prospects/<vertical>/<slug>/)
   const scriptPath = row.vertical
     ? `Clients/Prospects/${row.vertical}/${row.slug}/tella-script.md`
@@ -340,7 +361,11 @@ async function notify(row, verdict) {
   // a privacy relay means a real person whose location can't be trusted; an
   // unverified IP means both lookups failed, so read the location cautiously.
   let trust = "";
-  if (verdict && verdict.orgKnown) {
+  if (suspect) {
+    trust = `⚠️ ISP: ${verdict.orgText} — flagged as datacenter/security-vendor, but the visitor ` +
+      `genuinely interacted (scrolled/tapped), so this is likely a real person behind a VPN or ` +
+      `secure web gateway. Location may not be theirs.`;
+  } else if (verdict && verdict.orgKnown) {
     trust = orgClass(verdict.orgText) === "relay"
       ? `ISP: ${verdict.orgText} (privacy relay — location approximate)`
       : `ISP: ${verdict.orgText}`;
