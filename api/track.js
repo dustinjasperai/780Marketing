@@ -328,7 +328,14 @@ module.exports = async function handler(req, res) {
 
 async function logToSupabase(row) {
   const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_KEY;
-  if (!url || !key) return;
+  if (!url || !key) {
+    console.log("supabase_cfg missing url=" + !!url + " key=" + !!key);
+    return;
+  }
+  // Config fingerprint — host + key TYPE only (never the secret itself), so a
+  // wrong/truncated env var is diagnosable from the logs.
+  console.log("supabase_cfg host=" + url.replace(/^https?:\/\//, "").split("/")[0] +
+    " keyPrefix=" + key.slice(0, 10) + " keyLen=" + key.length);
   const post = (body) => fetch(url.replace(/\/$/, "") + "/rest/v1/showcase_views", {
     method: "POST",
     headers: {
@@ -341,6 +348,7 @@ async function logToSupabase(row) {
   });
   try {
     const r = await post(row);
+    console.log("supabase_insert status=" + (r && r.status));
     if (r && !r.ok) {
       // Older table without the bot_reason/ip_org columns — insert the base row
       // instead of dropping the hit. (Optional migration to keep the detail:
