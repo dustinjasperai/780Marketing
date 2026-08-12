@@ -301,8 +301,13 @@ module.exports = async function handler(req, res) {
   // beats total silence; `vercel logs` can grep "showcase_view").
   console.log("showcase_view " + JSON.stringify(row));
 
-  // Persist (fire-and-forget so logging never blocks the response)
-  logToSupabase(row).catch(() => {});
+  // Persist — AWAITED, for the same reason notify() is awaited below: Vercel
+  // can freeze the function the moment the response is sent, killing any
+  // un-awaited fetch. Fire-and-forget here meant load/dwell inserts died
+  // mid-flight 100% of the time (proven 2026-08-12: 200 responses, zero rows,
+  // zero error lines). The try/catch keeps a Supabase outage from ever
+  // breaking the pixel.
+  try { await logToSupabase(row); } catch (e) { /* logged inside; never block the pixel */ }
 
   // Alert only on a genuine engaged view from a human — cuts prefetch/scanner noise.
   // NOTE: we AWAIT the alert before responding. On Vercel the function can freeze the
