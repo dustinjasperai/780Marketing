@@ -334,16 +334,28 @@ async function logToSupabase(row) {
     },
     body: JSON.stringify(body),
   });
-  const r = await post(row);
-  if (r && !r.ok) {
-    // Older table without the bot_reason/ip_org columns — insert the base row
-    // instead of dropping the hit. (Optional migration to keep the detail:
-    //   alter table showcase_views add column if not exists bot_reason text,
-    //                              add column if not exists ip_org text;)
-    const base = Object.assign({}, row);
-    delete base.bot_reason;
-    delete base.ip_org;
-    await post(base);
+  try {
+    const r = await post(row);
+    if (r && !r.ok) {
+      // Older table without the bot_reason/ip_org columns — insert the base row
+      // instead of dropping the hit. (Optional migration to keep the detail:
+      //   alter table showcase_views add column if not exists bot_reason text,
+      //                              add column if not exists ip_org text;)
+      const base = Object.assign({}, row);
+      delete base.bot_reason;
+      delete base.ip_org;
+      const r2 = await post(base);
+      if (r2 && !r2.ok) {
+        // Say so in the function logs — a silent insert failure cost us the
+        // entire view history once (2026-08-12, wrong SUPABASE_URL). The pixel
+        // still returns 200 regardless; this is observability, not blocking.
+        console.log("supabase_insert_failed status=" + r2.status + " " +
+          (await r2.text().catch(() => "")).slice(0, 300));
+      }
+    }
+  } catch (e) {
+    console.log("supabase_insert_failed error=" + String(e && e.message || e).slice(0, 300));
+    throw e; // caller's .catch keeps the pixel safe, as before
   }
 }
 
