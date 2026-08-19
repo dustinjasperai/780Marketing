@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Call Is Booked | 780 Marketing</title>
+<meta name="description" content="Your strategy call with 780 Marketing is confirmed. Here's what the call covers, what an engagement costs, and the research material to review before we talk.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root{
+    --ink:#0a0a0b;
+    --ink-soft:#3c3a37;
+    --paper:#f4f1ec;
+    --white:#fffdfa;
+    --mute:#6f6c68;
+    --line:rgba(10,10,11,0.12);
+    --red:#c73a22;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Archivo',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--red);color:#fff;}
+  a{color:inherit;}
+
+  .col{max-width:720px;margin:0 auto;padding:0 24px;}
+
+  /* header */
+  header{border-bottom:1px solid var(--line);}
+  .head-in{max-width:720px;margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.01em;text-decoration:none;}
+  .logo .mk{color:var(--red);font-style:italic;}
+  .head-link{font-size:13px;color:var(--mute);text-decoration:none;}
+  .head-link:hover{color:var(--ink);}
+
+  /* type */
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--red);}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,6vw,52px);line-height:1.08;letter-spacing:-.02em;margin:14px 0 20px;}
+  h1 em{font-style:italic;color:var(--red);}
+  h2{font-family:var(--serif);font-weight:500;font-size:clamp(24px,3.4vw,31px);line-height:1.15;letter-spacing:-.015em;margin-bottom:18px;}
+  h2 em{font-style:italic;color:var(--red);}
+  h3{font-size:15.5px;font-weight:600;letter-spacing:-.01em;}
+  p{font-size:16px;line-height:1.7;color:var(--ink-soft);}
+  p strong{color:var(--ink);font-weight:600;}
+  p + p{margin-top:14px;}
+
+  section{padding:clamp(44px,7vw,64px) 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .lede{margin-top:26px;}
+
+  /* booking-details card (populated from Calendly redirect params) */
+  .booking-card{margin-top:26px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 26px;display:flex;gap:16px;align-items:flex-start;}
+  .booking-card[hidden]{display:none;}  /* stay fully hidden when no booking data is passed */
+  .booking-card .bc-icon{flex:none;width:38px;height:38px;border-radius:10px;background:rgba(199,58,34,.09);border:1px solid rgba(199,58,34,.4);display:flex;align-items:center;justify-content:center;margin-top:2px;}
+  .booking-card .bc-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--red);}
+  .booking-card .bc-when{font-family:var(--serif);font-size:clamp(21px,3vw,27px);font-weight:500;letter-spacing:-.015em;line-height:1.2;margin-top:6px;color:var(--ink);}
+  .booking-card .bc-sub{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.55;}
+
+  /* plain numbered list */
+  ol.plain{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:20px;counter-reset:n;}
+  ol.plain > li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;gap:14px;}
+  ol.plain > li::before{content:counter(n,decimal-leading-zero);font-family:var(--serif);font-size:15px;color:var(--red);padding-top:2px;}
+  ol.plain h3{margin-bottom:4px;}
+  ol.plain p{font-size:15px;line-height:1.65;}
+
+  /* pricing */
+  .price-box{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:30px 32px;margin:26px 0 22px;}
+  .price-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+  .price-num{font-family:var(--serif);font-size:clamp(34px,5vw,44px);font-weight:500;letter-spacing:-.02em;color:var(--red);}
+  .price-cap{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+  .price-box ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px;}
+  .price-box li{font-size:15px;line-height:1.55;color:var(--ink-soft);padding-left:20px;position:relative;}
+  .price-box li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:rgba(199,58,34,.14);border:1px solid rgba(199,58,34,.5);}
+
+  /* faq */
+  .faq-list{margin-top:26px;border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:18px;cursor:pointer;padding:20px 2px;list-style:none;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary h3{font-family:var(--serif);font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.3;}
+  .faq-item summary:hover h3{color:var(--red);}
+  .faq-toggle{flex:none;font-family:var(--serif);font-size:22px;line-height:1;color:var(--mute);}
+  .faq-item[open] .faq-toggle{color:var(--red);}
+  .faq-answer{padding:0 2px 22px;}
+  .faq-answer p{font-size:15px;line-height:1.7;}
+
+  /* results */
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0;}
+  .stat{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 24px;}
+  .stat .snum{font-family:var(--serif);font-size:clamp(24px,3.6vw,30px);font-weight:500;letter-spacing:-.02em;color:var(--red);}
+  .stat .snum .small{font-size:.55em;}
+  .stat .scap{font-size:12.5px;line-height:1.5;color:var(--mute);margin-top:6px;}
+
+  /* logo strip */
+  .logos-row{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(24px,5vw,42px);margin:26px 0;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .logo-img{height:28px;width:auto;filter:grayscale(1) brightness(0);opacity:.4;transition:opacity .3s ease;}
+  .logo-img:hover{opacity:.68;}
+  .logo-wordmark{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);opacity:.4;letter-spacing:-.01em;}
+  .logo-wordmark em{font-style:italic;}
+
+  /* video testimonials */
+  .videos{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:30px 0 10px;}
+  .vid{margin:0;}
+  .vid-frame{position:relative;width:100%;padding-top:56.25%;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000;}
+  .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .vid figcaption{margin-top:14px;display:flex;flex-direction:column;gap:3px;}
+  .vid .vname{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  .vid .vrole{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);}
+  .vid .vlink{margin-top:8px;font-size:13px;font-weight:600;color:var(--red);text-decoration:none;align-self:flex-start;}
+  .vid .vlink:hover{text-decoration:underline;text-underline-offset:3px;}
+
+  /* email screenshot proof */
+  .email-proof{margin:34px 0 0;}
+  .email-proof img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 18px 46px -30px rgba(10,10,11,.35);}
+  .email-proof figcaption{margin-top:14px;font-size:13px;color:var(--mute);}
+  .email-proof figcaption a{color:var(--red);text-decoration:none;font-weight:600;}
+  .email-proof figcaption a:hover{text-decoration:underline;text-underline-offset:3px;}
+
+  blockquote{border-left:2px solid var(--red);padding:4px 0 4px 20px;margin-top:26px;}
+  blockquote p{font-family:var(--serif);font-size:16.5px;line-height:1.55;color:var(--ink);}
+  blockquote footer{margin-top:10px;font-size:13px;color:var(--mute);}
+  blockquote footer a{color:var(--mute);}
+  blockquote footer a:hover{color:var(--red);}
+
+  /* resource links */
+  ul.links{list-style:none;margin-top:26px;display:flex;flex-direction:column;}
+  ul.links li{border-bottom:1px solid var(--line);}
+  ul.links li:last-child{border-bottom:none;}
+  ul.links a{display:block;padding:18px 2px;text-decoration:none;}
+  ul.links .lt{font-family:var(--serif);font-size:18px;font-weight:500;letter-spacing:-.01em;line-height:1.3;}
+  ul.links a:hover .lt{color:var(--red);}
+  ul.links .ld{font-size:14px;line-height:1.6;color:var(--mute);margin-top:4px;}
+
+  /* checklist */
+  ul.check{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+  ul.check li{padding-left:28px;position:relative;font-size:15.5px;line-height:1.65;color:var(--ink-soft);}
+  ul.check li strong{color:var(--ink);font-weight:600;}
+  ul.check li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:14px;border-radius:4px;border:1.5px solid var(--red);background:rgba(199,58,34,.08);}
+  .aside{margin-top:22px;font-size:14.5px;color:var(--mute);}
+
+  /* footer */
+  .foot-note{padding:28px 0;}
+  .foot-note p{font-size:14px;color:var(--mute);}
+  .foot-note a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(199,58,34,.5);}
+  .foot-note a:hover{text-decoration-color:var(--red);}
+  footer{border-top:1px solid var(--line);}
+  .foot-in{max-width:720px;margin:0 auto;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .foot-meta{font-size:12px;color:var(--mute);}
+
+  @media(max-width:560px){
+    .stats{grid-template-columns:1fr;}
+  }
+
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <a href="/" class="logo">780 <span class="mk">Marketing</span></a>
+    <a href="/#results" class="head-link">780marketing.ca</a>
+  </div>
+</header>
+
+<main class="col">
+
+  <!-- HERO -->
+  <section>
+    <span class="eyebrow">Booking Confirmed</span>
+    <h1>Your call is booked.<br>Here are the <em>next steps</em>.</h1>
+
+    <div class="booking-card" id="bookingCard" hidden>
+      <div class="bc-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 8h12M7 3v2M13 3v2" stroke="#c73a22" stroke-width="1.5" stroke-linecap="round"/><rect x="3.25" y="4.75" width="13.5" height="12" rx="2" stroke="#c73a22" stroke-width="1.5"/><path d="M7.5 12l1.6 1.6L13 10" stroke="#c73a22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="bc-label" id="bcLabel">You're confirmed</div>
+        <div class="bc-when" id="bcWhen"></div>
+        <div class="bc-sub" id="bcSub">The join link and full details are in your calendar invite.</div>
+      </div>
+    </div>
+
+    <p>The steps below go over what we'll cover on the call and answers to common FAQs.</p>
+    <!--
+      OPTIONAL VIDEO SLOT: when a 2-4 min welcome video exists, embed it here
+      (5-part structure per Skills/Marketing/Funnels/confirmation-page).
+    -->
+  </section>
+
+  <!-- THE CALL -->
+  <section>
+    <span class="eyebrow">What Happens On The Call</span>
+    <h2>Thirty minutes with Dustin.</h2>
+    <ol class="plain">
+      <li>
+        <div>
+          <h3>Your business first</h3>
+          <p>We'll go over your current client acquisition systems and identify the primary constraints.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Identifying your ideal outcomes</h3>
+          <p>This is different for everyone. We'll cover what your ideal outcomes look like in the business, whether that's optimizing an existing funnel, scaling with more traffic, or launching paid ads for the first time.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h3>Financial planning</h3>
+          <p>If your outcomes are aligned with the services we offer, we'll go through our recommended plan. Then we'll model out your expected costs and funnel KPIs through a financial model.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2>FAQs</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><h3>What do you charge?</h3><span class="faq-toggle">+</span></summary>
+        <div class="faq-answer">
+          <p>Our pricing model is different from a traditional agency. In most cases, we charge a one-time buildout fee for a 90-day engagement. Everything is built by us, done for you, and managed by us, then you keep all of the marketing assets and systems. Engagements start at $5,000.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary><h3>Who am I actually talking to?</h3><span class="faq-toggle">+</span></summary>
+        <div class="faq-answer">
+          <p>Dustin Jasper, head of 780 Marketing. I am the point of contact with every client. We've worked with dozens of businesses over the last 4 years, helping them with marketing, focusing on paid acquisition. I started running my own business in the home service industry, scaling it through paid advertising, then began offering ad services to businesses in other industries. Now we work with around 10 clients at any given time, including industries like coaching and consulting, software, raising capital, and brick-and-mortar businesses.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary><h3>Is there any guarantee of performance?</h3><span class="faq-toggle">+</span></summary>
+        <div class="faq-answer">
+          <p>We design our pricing so our incentives are aligned. Projects that relate to client acquisition come with a guarantee of booked sales calls.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary><h3>Have you worked with businesses like mine?</h3><span class="faq-toggle">+</span></summary>
+        <div class="faq-answer">
+          <p>We've worked within a lot of different niches within the coaching and consulting space because the economics of paid ads work well there. Aside from that we've worked in B2B SaaS, home care, home services, brick-and-mortar retail businesses, and campaigns raising capital. If we haven't worked in your exact niche we'll say so plainly, but in most cases we've worked in adjacent niches that share similarities with your specific business.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary><h3>Can I talk to a past client?</h3><span class="faq-toggle">+</span></summary>
+        <div class="faq-answer">
+          <p>Yes. Ask on the call and Dustin will connect you with a client reference directly. The case studies linked below are a starting point; several clients are happy to take a call about what working together was like.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section>
+    <h2>Businesses we've <em>worked with</em>.</h2>
+
+    <div class="logos-row">
+      <img src="/assets/logos/passive-workforce.png" alt="Passive Workforce" class="logo-img" loading="lazy" width="180" height="60">
+      <span class="logo-wordmark">FR <em>Consulting</em></span>
+      <img src="/assets/logos/abraham-dietitian.png" alt="Abraham Dietitian" class="logo-img" loading="lazy" width="180" height="66">
+      <img src="/assets/logos/painupdated.png" alt="painUpdated" class="logo-img" loading="lazy" width="180" height="48">
+      <img src="/assets/logos/ontime-its.png" alt="Ontime ITS" class="logo-img" loading="lazy" width="120" height="39">
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="snum">$20K<span class="small">/mo</span> &rarr; $50K<span class="small">/mo</span></div><div class="scap">Grew a career consultant helping students break into the capital markets from $20K/mo to $50K/mo sustainably in the first month. Added a structured book-a-call VSL funnel and backend systems to increase revenue on existing traffic.</div></div>
+      <div class="stat"><div class="snum">$15K<span class="small"> in a day</span></div><div class="scap">Worked with a weight-loss coach to establish a webinar funnel with Meta ads feeding it. The first webinar returned roughly 10:1 on ad spend and $15K in the first webinar.</div></div>
+      <div class="stat"><div class="snum">$50K<span class="small">/mo+</span></div><div class="scap">Healthcare coaching program. In the first month of working with this client we added $20K/mo in additional revenue at a 4:1 return on ad spend. ROAS has held consistently over the last year as spend has increased.</div></div>
+      <div class="stat"><div class="snum">A&ndash;Z Launch<span class="small"> in healthcare</span></div><div class="scap">Program build and launch for an expert in the chronic pain space. We built and launched their first offering: the offer itself, marketing angles, and set-up of all backend tech and community. 100% satisfaction across the first cohort of 30 people.</div></div>
+    </div>
+
+    <div class="videos">
+      <figure class="vid">
+        <div class="vid-frame">
+          <iframe src="https://fast.wistia.net/embed/iframe/7axx0ouvu0?playerColor=c73a22&seo=true" title="Matthew Farquhar testimonial" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <figcaption>
+          <span class="vname">Matthew Farquhar</span>
+          <span class="vrole">Career Coaching Consultant</span>
+          <a class="vlink" href="/case-studies/matthew-farquhar">Read the case study &rarr;</a>
+        </figcaption>
+      </figure>
+      <figure class="vid">
+        <div class="vid-frame">
+          <iframe src="https://fast.wistia.net/embed/iframe/q2ysgtxxtl?playerColor=c73a22&seo=true" title="Abraham Anjarkouchian testimonial" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <figcaption>
+          <span class="vname">Abraham Anjarkouchian</span>
+          <span class="vrole">Registered Dietitian · Weight Loss</span>
+          <a class="vlink" href="/case-studies/weight-loss-coaching">Read the case study &rarr;</a>
+        </figcaption>
+      </figure>
+    </div>
+
+    <figure class="email-proof">
+      <img src="/assets/testimonials/veronika-passiveworkforce.png" alt="Email from Veronika Oquendo of Passive Workforce describing a year of working with Dustin: a whole system that works, consistent delivery, real results, and a full recommendation." loading="lazy" width="2207" height="919">
+      <figcaption>Veronika Oquendo · Passive Workforce (healthcare education) · <a href="/case-studies/passive-workforce">Read the case study &rarr;</a></figcaption>
+    </figure>
+  </section>
+
+  <!-- PREPARE -->
+  <section>
+    <span class="eyebrow">Before We Talk</span>
+    <h2>Come with <em>your numbers</em>.</h2>
+    <p>The financial model gets built from what you know about your own business. The more of this you have handy, the more specific the call gets.</p>
+    <ul class="check">
+      <li><strong>What your offer sells for,</strong> and how clients find you today.</li>
+      <li><strong>Any past ads or webinar numbers,</strong> even rough ones. Failed campaigns are useful data.</li>
+      <li><strong>Your current LTV and CAC:</strong> how long a client stays and what they're worth over that time, plus your current cost to acquire a customer if you're currently spending on ads.</li>
+      <li><strong>Your list and your tools:</strong> email list size, any groups or audiences you've built, and what you run on today.</li>
+    </ul>
+    <p class="aside">Don't have the numbers? Come anyway. Untracked metrics are often the first leak the call finds.</p>
+  </section>
+
+  <!-- RESOURCES -->
+  <section>
+    <span class="eyebrow">Do Your Research</span>
+    <h2>Check out some of our blogs.</h2>
+    <ul class="links">
+      <li><a href="/articles/cost-per-booked-call-benchmarks">
+        <div class="lt">Cost Per Booked Call Benchmarks for High-Ticket Offers</div>
+        <div class="ld">Real campaign data: a booked sales call from Meta ads typically costs $150 to $350. The math behind your financial model.</div>
+      </a></li>
+      <li><a href="/articles/why-your-facebook-ads-didnt-work-coaching">
+        <div class="lt">Why Your Facebook Ads Didn't Work</div>
+        <div class="ld">If you've run ads and shut them off with nothing to show for it: all 12 causes we find in post-mortems.</div>
+      </a></li>
+      <li><a href="/articles/webinar-vs-vsl-vs-call-funnel">
+        <div class="lt">Webinar vs. VSL vs. Direct-to-Call: Which Fits Your Offer</div>
+        <div class="ld">Price point, belief shift, and sales capacity decide which funnel we'd recommend for you.</div>
+      </a></li>
+    </ul>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <a href="/" class="logo">780 <span class="mk">Marketing</span></a>
+    <span class="foot-meta">Performance Marketing &middot; Calgary, AB &middot; &copy; 2026 780 Marketing</span>
+  </div>
+</footer>
+
+<script>
+  // Populate the booking-details card from Calendly's redirect parameters.
+  // In Calendly: Event > Confirmation Page > "Redirect to an external site",
+  // then enable "Pass event details to your redirected page". Calendly appends
+  // event_start_time (ISO 8601 with offset), invitee_full_name, event_type_name, etc.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var startRaw = params.get('event_start_time');
+    if (!startRaw) return; // no data (e.g. direct visit) -> leave card hidden
+
+    var m = String(startRaw).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+    if (!m) return;
+
+    // Format the wall-clock time exactly as the invitee booked it (their timezone),
+    // by treating the parsed components as UTC purely for display formatting.
+    var d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]));
+    var opts = { timeZone: 'UTC' };
+    var datePart, timePart;
+    try {
+      datePart = d.toLocaleDateString('en-US', Object.assign({ weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }, opts));
+      timePart = d.toLocaleTimeString('en-US', Object.assign({ hour: 'numeric', minute: '2-digit' }, opts));
+    } catch (e) {
+      return;
+    }
+
+    var whenEl = document.getElementById('bcWhen');
+    whenEl.textContent = datePart + ' at ' + timePart;
+
+    // Personalize the label with the invitee's first name when available.
+    var name = params.get('invitee_full_name');
+    if (name) {
+      var first = name.trim().split(/\s+/)[0];
+      if (first) document.getElementById('bcLabel').textContent = "You're confirmed, " + first;
+    }
+
+    document.getElementById('bookingCard').hidden = false;
+  })();
+</script>
+
+</body>
+</html>
