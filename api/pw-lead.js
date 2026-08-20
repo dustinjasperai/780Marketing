@@ -72,11 +72,15 @@ const FIELDS = {
   session:    { key: 'contact.webinar_session',  name: 'Webinar Session',  create: true },
 
   // --- attribution ---
-  utmSource:  { key: 'contact.utm_source',   name: 'UTM Source',   create: true },
-  utmMedium:  { key: 'contact.utm_medium',   name: 'UTM Medium',   create: true },
-  utmCampaign:{ key: 'contact.utm_campaign', name: 'UTM Campaign', create: true },
-  utmTerm:    { key: 'contact.utm_term',     name: 'UTM Term',     create: true },
-  utmContent: { key: 'contact.utm_content',  name: 'UTM Content',  create: true },
+  // The five UTMs are VERIFY-ONLY (no create) as of 2026-08-20, confirmed live
+  // to resolve against existing fields. Auto-creating them was a silent-duplicate
+  // hazard: rename one in GHL and the relay would quietly build a replacement and
+  // keep reporting success, splitting attribution across two fields.
+  utmSource:  { key: 'contact.utm_source',   name: 'UTM Source' },
+  utmMedium:  { key: 'contact.utm_medium',   name: 'UTM Medium' },
+  utmCampaign:{ key: 'contact.utm_campaign', name: 'UTM Campaign' },
+  utmTerm:    { key: 'contact.utm_term',     name: 'UTM Term' },
+  utmContent: { key: 'contact.utm_content',  name: 'UTM Content' },
   gclid:      { key: 'contact.google_click_id', name: 'Google Click ID', create: true },
   adId:       { key: 'contact.ad_id',        name: 'Ad ID',        create: true },
   adsetId:    { key: 'contact.adset_id',     name: 'Adset ID',     create: true },
@@ -131,9 +135,12 @@ const TAGS = {
   // Step 1 alone (name, email, phone) is a real registration — the reminder
   // sequence triggers on 'turnkey webinar registrant', so it has to be here or
   // someone who gives their contact details and stops gets no reminders and no
-  // join link. 'form started' stays alongside it purely as a data marker for
-  // who never finished the qualifying questions.
-  partial: ['turnkey webinar registrant', 'turnkey webinar form started'],
+  // join link.
+  //
+  // 'turnkey webinar form started' was dropped 2026-08-20: no workflow used it
+  // and the segment is derivable — registrant WITHOUT qualified and WITHOUT not
+  // qualified is exactly the set who never finished the questions.
+  partial: ['turnkey webinar registrant'],
   qualified: ['turnkey webinar registrant', 'turnkey webinar qualified'],
   notQualified: ['turnkey webinar registrant', 'turnkey webinar not qualified'],
 };
@@ -161,16 +168,41 @@ const ROUTE_LABELS = {
 };
 
 // Dated cohort tag from the session date the page rendered, e.g.
-// "Thursday, August 14" -> "turnkey webinar august 14". Lets setters
-// segment by session. Skipped if the merge token didn't render.
-function cohortTag(raw) {
+// "Wednesday, September 2" -> "turnkey webinar registrants - 09/02/26".
+//
+// Format is month/day/year, zero-padded, 2-digit year, matching the sales team's
+// existing convention in this sub-account ("02/04/26 webinar registrant"). These
+// tags ACCUMULATE — one per webinar a contact registers for — so the format must
+// never drift or the history splits across two tags nobody is looking at.
+//
+// The displayed date carries no year, so the year is the NEXT FUTURE OCCURRENCE
+// of that month/day. That is what makes a January session promoted in December
+// tag as next year rather than the current one.
+//
+// Returns null if the merge token did not render, which fails safe: no tag,
+// rather than a garbage cohort.
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
+                'august', 'september', 'october', 'november', 'december'];
+
+function cohortTag(raw, now = new Date()) {
   const s = typeof raw === 'string' ? raw.trim().slice(0, 80) : '';
   if (!s || s.includes('{{')) return null;
-  const t = s.toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
-    .replace(/^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+/, '');
-  return t ? `turnkey webinar ${t}` : null;
+
+  const cleaned = s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const m = cleaned.match(/([a-z]+)\s+(\d{1,2})/);
+  if (!m) return null;
+
+  const month = MONTHS.indexOf(m[1]);
+  const day = parseInt(m[2], 10);
+  if (month < 0 || !(day >= 1 && day <= 31)) return null;
+
+  // Next future occurrence: this year unless that date has already passed.
+  let year = now.getUTCFullYear();
+  const thisYear = Date.UTC(year, month, day, 23, 59, 59);
+  if (thisYear < now.getTime()) year += 1;
+
+  const pad = (n) => String(n).padStart(2, '0');
+  return `turnkey webinar registrants - ${pad(month + 1)}/${pad(day)}/${String(year).slice(-2)}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -344,6 +376,8 @@ module.exports = async function handler(req, res) {
   const qualified = body.qualified === true;
 
   const firstName = cleanStr(contact.firstName, 100);
+  const lastName = cleanStr(contact.lastName, 100);
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
   const email = cleanStr(contact.email, 200).toLowerCase();
   const phone = cleanStr(contact.phone, 40);
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
@@ -352,7 +386,7 @@ module.exports = async function handler(req, res) {
 
   if (!process.env.PW_GHL_TOKEN || !process.env.PW_GHL_LOCATION_ID) {
     await telegram('🚨 PW form relay: PW_GHL_TOKEN / PW_GHL_LOCATION_ID not set — a submission was NOT synced.\n' +
-      `${firstName} <${email}> ${phone}`);
+      `${fullName} <${email}> ${phone}`);
     return res.status(500).json({ ok: false, error: 'relay not configured' });
   }
 
@@ -424,23 +458,56 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    await ghlFetch('/contacts/upsert', {
+    // NOTE: `tags` is deliberately NOT sent here. GHL's upsert REPLACES the tag
+    // array rather than merging it, so sending tags on every write wipes whatever
+    // the contact already carried — an applicant lost their registrant tag and
+    // their session cohort tag, and a repeat registrant lost the dated tag from
+    // their previous webinar. Custom fields merge; tags do not. Proven on
+    // production four times, 2026-08-19.
+    //
+    // Tags are added below through the dedicated endpoint, which APPENDS. That is
+    // what lets the dated cohort tags accumulate, one per webinar, permanently.
+    const upserted = await ghlFetch('/contacts/upsert', {
       method: 'POST',
       body: JSON.stringify({
         locationId: process.env.PW_GHL_LOCATION_ID,
         firstName,
+        // Omitted rather than sent empty: an empty string would overwrite a
+        // surname already on the contact from an earlier submission.
+        lastName: lastName || undefined,
         email,
         phone: phone || undefined,
         source: isApp ? 'Turnkey Post-Webinar Application' : 'Turnkey Webinar Registration',
-        tags,
         customFields: cf,
       }),
     });
 
+    const contactId =
+      (upserted && upserted.contact && upserted.contact.id) ||
+      (upserted && upserted.id) || null;
+
+    if (contactId && tags.length) {
+      // A tag failure must never cost us the lead — the contact already exists at
+      // this point. Alert and carry on rather than throwing.
+      try {
+        await ghlFetch(`/contacts/${contactId}/tags`, {
+          method: 'POST',
+          body: JSON.stringify({ tags }),
+        });
+      } catch (tagErr) {
+        await telegram('PW form relay: contact saved but TAGS FAILED, so no workflow ' +
+          `will fire for them.\n${fullName} <${email}>\n${tags.join(', ')}\n` +
+          String(tagErr.message).slice(0, 200));
+      }
+    } else if (!contactId) {
+      await telegram('PW form relay: upsert returned no contact id, so NO TAGS were ' +
+        `applied and no workflow will fire.\n${fullName} <${email}>`);
+    }
+
     if (stage === 'final' && qualified && process.env.PW_LEAD_ALERTS !== 'off') {
       await telegram(
         isApp
-          ? `🔥 PW Turnkey APPLICATION — qualified, booking now\n${firstName} <${email}> ${phone}\n` +
+          ? `🔥 PW Turnkey APPLICATION — qualified, booking now\n${fullName} <${email}> ${phone}\n` +
             `${ROUTE_LABELS[body.route] || 'route unknown'}\n` +
             `${cleanStr(answers.agencyType)} · ${cleanStr(answers.state)}` +
             `${flags.homecareRestrictedState === true ? ' ⚠️ restricted home care state' : ''}\n` +
@@ -448,7 +515,7 @@ module.exports = async function handler(req, res) {
             `Capital: ${cleanStr(answers.capital)}\nDecision: ${cleanStr(answers.decision)}\n` +
             `Source: ${cleanStr(params.utm_source) || 'direct'} / ${cleanStr(params.utm_campaign) || '-'}` +
             (cleanStr(answers.notes) ? `\nNotes: ${cleanStr(answers.notes, 300)}` : '')
-          : `✅ PW Turnkey QUALIFIED lead\n${firstName} <${email}> ${phone}\n` +
+          : `✅ PW Turnkey QUALIFIED lead\n${fullName} <${email}> ${phone}\n` +
             `Stage: ${cleanStr(answers.process)}\nTiming: ${cleanStr(answers.timing)}\n` +
             `Source: ${cleanStr(params.utm_source) || 'direct'} / ${cleanStr(params.utm_campaign) || '-'}`
       );
@@ -457,7 +524,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('pw-lead sync failed:', String(err.message).slice(0, 500));
-    await telegram(`🚨 PW form relay: GHL sync FAILED (${stage}).\n${firstName} <${email}> ${phone}\n${String(err.message).slice(0, 300)}`);
+    await telegram(`🚨 PW form relay: GHL sync FAILED (${stage}).\n${fullName} <${email}> ${phone}\n${String(err.message).slice(0, 300)}`);
     return res.status(502).json({ ok: false });
   }
 };
