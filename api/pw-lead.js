@@ -57,6 +57,10 @@ const FIELDS = {
                 name: 'Lastly, our service covers building a business from start to finish. It starts at a 5-figure investment. How much are you willing to invest to start a successful business?' },
   stage:      { key: 'contact.where_are_you_at_in_the_process',
                 name: 'Where are you at in the process?' },
+  // Registration form's five-figure Yes/No. Built by hand in GHL 2026-08-23,
+  // so verify-only like the UTMs — never auto-create a duplicate.
+  investment: { key: 'contact.open_to_the_investment',
+                name: 'Open to the investment?' },
   state:      { key: 'contact.what_state_are_you_in',
                 name: 'What State are you in?' },
   priority:   { key: 'contact.turnkey_priority',
@@ -105,6 +109,13 @@ const CAPITAL = {
   '$10,000 to $15,000':  '$10-$15k',
   '$15,000 to $20,000':  '$15k+',   // collapsed, by decision 2026-08-19
   '$20,000 or more':     '$15k+',   // collapsed, by decision 2026-08-19
+};
+
+// Registration form's investment question. The page sends Yes/No verbatim and
+// the GHL radio offers exactly those two options.
+const INVESTMENT = {
+  'Yes': 'Yes',
+  'No':  'No',
 };
 
 // Turn-Key Priority follows the money, nothing else.
@@ -449,6 +460,7 @@ module.exports = async function handler(req, res) {
       if (stage === 'final') {
         putChoice('stage', STAGE_REG, answers.process);
         put('timeline', answers.timing);
+        putChoice('investment', INVESTMENT, answers.investment);
         tags = qualified ? TAGS.qualified : TAGS.notQualified;
       }
       const cohort = cohortTag(body.session);
