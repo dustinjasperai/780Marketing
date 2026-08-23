@@ -73,7 +73,10 @@ const FIELDS = {
   decision:   { key: 'contact.decision_makers',  name: 'Decision Makers',  create: true },
   notes:      { key: 'contact.application_notes', name: 'Application Notes', create: true },
   route:      { key: 'contact.booking_route',    name: 'Booking Route',    create: true },
-  session:    { key: 'contact.webinar_session',  name: 'Webinar Session',  create: true },
+  // Renamed in GHL 2026-08-23 (key unchanged). Name must track the GHL display
+  // name: on a create:true field a stale name means a failed key lookup would
+  // CREATE a duplicate instead of falling back to the renamed field.
+  session:    { key: 'contact.webinar_session',  name: 'Turnkey Webinar Session',  create: true },
 
   // --- attribution ---
   // The five UTMs are VERIFY-ONLY (no create) as of 2026-08-20, confirmed live
