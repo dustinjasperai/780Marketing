@@ -139,6 +139,20 @@
   ul.links a:hover .lt{color:var(--red);}
   ul.links .ld{font-size:14px;line-height:1.6;color:var(--mute);margin-top:4px;}
 
+  /* optional prep form */
+  .prep-form{margin-top:26px;display:flex;flex-direction:column;gap:18px;}
+  .pf-field{display:flex;flex-direction:column;gap:8px;}
+  .pf-field label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;}
+  .pf-field input,.pf-field textarea{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .pf-field textarea{resize:vertical;min-height:96px;}
+  .pf-field input::placeholder,.pf-field textarea::placeholder{color:var(--mute);}
+  .pf-btn{align-self:flex-start;font-family:var(--sans);font-size:15px;font-weight:600;color:#fff;background:var(--red);border:0;border-radius:10px;padding:13px 26px;cursor:pointer;transition:background .2s ease;}
+  .pf-btn:hover{background:#a92f1b;}
+  .pf-btn:disabled{opacity:.6;cursor:default;}
+  .pf-note{font-size:13.5px;color:var(--red);}
+  .pf-done{margin-top:26px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 26px;font-size:15.5px;color:var(--ink);}
+  #pfHp{position:absolute;left:-9999px;height:0;width:0;border:0;padding:0;}
+
   /* checklist */
   ul.check{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px;}
   ul.check li{padding-left:28px;position:relative;font-size:15.5px;line-height:1.65;color:var(--ink-soft);}
@@ -194,6 +208,31 @@
       OPTIONAL VIDEO SLOT: when a 2-4 min welcome video exists, embed it here
       (5-part structure per Skills/Marketing/Funnels/confirmation-page).
     -->
+  </section>
+
+  <!-- OPTIONAL PREP FORM -->
+  <section>
+    <span class="eyebrow">Optional &middot; One Minute</span>
+    <h2>Help Dustin <em>prep</em> for your call.</h2>
+    <p>The call happens either way — but if you answer these now, we'll research your business before we talk and spend the call on specifics instead of background.</p>
+    <form id="prepForm" class="prep-form" novalidate>
+      <div class="pf-field">
+        <label for="pfTopics">Anything specific you're hoping to discuss, or problems you're dealing with right now?</label>
+        <textarea id="pfTopics" name="topics" rows="4" placeholder="Ads that didn't convert, a funnel that leaks, not sure where to start&hellip;"></textarea>
+      </div>
+      <div class="pf-field">
+        <label for="pfWebsite">Your business website, or any funnels currently in place, so we can do our research before the call.</label>
+        <input id="pfWebsite" name="website" type="text" placeholder="yourbusiness.com">
+      </div>
+      <div class="pf-field" id="pfEmailWrap">
+        <label for="pfEmail">The email you booked with, so we can match this to your call.</label>
+        <input id="pfEmail" name="email" type="email" placeholder="you@company.com">
+      </div>
+      <input type="text" name="hp" id="pfHp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="pf-btn" id="pfBtn">Send it over</button>
+      <p class="pf-note" id="pfNote" role="status"></p>
+    </form>
+    <p class="pf-done" id="pfDone" hidden>Got it — Dustin will read this before your call. See you there.</p>
   </section>
 
   <!-- THE CALL -->
@@ -388,6 +427,59 @@
     }
 
     document.getElementById('bookingCard').hidden = false;
+  })();
+
+  // Optional prep form -> /api/call-prep -> email to Dustin. This replaced
+  // the required Calendly invitee questions (removed 2026-08-24), so it must
+  // stay friction-free: everything optional, booking already done.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var bookedEmail = params.get('invitee_email') || '';
+    var bookedName = params.get('invitee_full_name') || '';
+    var form = document.getElementById('prepForm');
+    var emailInput = document.getElementById('pfEmail');
+
+    // Calendly passed the invitee's email -> don't ask for it again.
+    if (bookedEmail) {
+      emailInput.value = bookedEmail;
+      document.getElementById('pfEmailWrap').hidden = true;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var topics = document.getElementById('pfTopics').value.trim();
+      var website = document.getElementById('pfWebsite').value.trim();
+      var note = document.getElementById('pfNote');
+      if (!topics && !website) {
+        note.textContent = 'Add an answer to at least one question first.';
+        return;
+      }
+      var btn = document.getElementById('pfBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      note.textContent = '';
+
+      fetch('/api/call-prep', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: bookedName,
+          email: emailInput.value.trim(),
+          callTime: params.get('event_start_time') || '',
+          topics: topics,
+          website: website,
+          hp: document.getElementById('pfHp').value,
+        }),
+      }).then(function (r) {
+        if (!r.ok) throw new Error('send failed');
+        form.hidden = true;
+        document.getElementById('pfDone').hidden = false;
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Send it over';
+        note.textContent = "Couldn't send right now — no worries, you can reply to your confirmation email with this instead.";
+      });
+    });
   })();
 </script>
 
