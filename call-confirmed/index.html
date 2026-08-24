@@ -141,7 +141,9 @@
 
   /* optional prep form */
   .prep-form{margin-top:26px;display:flex;flex-direction:column;gap:18px;}
+  .prep-form[hidden]{display:none;}  /* display:flex would otherwise override [hidden] */
   .pf-field{display:flex;flex-direction:column;gap:8px;}
+  .pf-field[hidden]{display:none;}
   .pf-field label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;}
   .pf-field input,.pf-field textarea{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
   .pf-field textarea{resize:vertical;min-height:96px;}
