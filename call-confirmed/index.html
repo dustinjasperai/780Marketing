@@ -145,7 +145,8 @@
   .pf-field{display:flex;flex-direction:column;gap:8px;}
   .pf-field[hidden]{display:none;}
   .pf-field label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;}
-  .pf-field input,.pf-field textarea{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .pf-field input,.pf-field textarea,.pf-field select{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .pf-field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236f6c68' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
   .pf-field textarea{resize:vertical;min-height:96px;}
   .pf-field input::placeholder,.pf-field textarea::placeholder{color:var(--mute);}
   .pf-btn{align-self:flex-start;font-family:var(--sans);font-size:15px;font-weight:600;color:#fff;background:var(--red);border:0;border-radius:10px;padding:13px 26px;cursor:pointer;transition:background .2s ease;}
@@ -214,17 +215,35 @@
 
   <!-- OPTIONAL PREP FORM -->
   <section>
-    <span class="eyebrow">Optional &middot; One Minute</span>
-    <h2>Help Dustin <em>prep</em> for your call.</h2>
-    <p>The call happens either way — but if you answer these now, we'll research your business before we talk and spend the call on specifics instead of background.</p>
+    <span class="eyebrow">Optional</span>
+    <h2>Complete Your Pre-Call <em>Assessment</em> Form.</h2>
+    <p>The call happens either way — but if you fill this in, Dustin reviews your answers and researches your business before you talk, so the call starts on specifics instead of background.</p>
     <form id="prepForm" class="prep-form" novalidate>
       <div class="pf-field">
-        <label for="pfTopics">Anything specific you're hoping to discuss, or problems you're dealing with right now?</label>
-        <textarea id="pfTopics" name="topics" rows="4" placeholder="Ads that didn't convert, a funnel that leaks, not sure where to start&hellip;"></textarea>
+        <label for="pfBusiness">Tell us about your business — what do you sell, and who is it for?</label>
+        <textarea id="pfBusiness" name="business" rows="3" placeholder="Coaching program for dentists, $5k over 12 weeks&hellip;"></textarea>
       </div>
       <div class="pf-field">
         <label for="pfWebsite">Your business website, or any funnels currently in place, so we can do our research before the call.</label>
         <input id="pfWebsite" name="website" type="text" placeholder="yourbusiness.com">
+      </div>
+      <div class="pf-field">
+        <label for="pfProblem">What's the main problem you're hoping to solve right now?</label>
+        <textarea id="pfProblem" name="problem" rows="3" placeholder="Ads that didn't convert, a funnel that leaks, not sure where to start&hellip;"></textarea>
+      </div>
+      <div class="pf-field">
+        <label for="pfAds">Have you run paid ads before?</label>
+        <select id="pfAds" name="ads">
+          <option value="" selected>Choose one&hellip;</option>
+          <option>Never run ads before</option>
+          <option>Ran ads before &mdash; didn't work out</option>
+          <option>Running ads now &mdash; want better results</option>
+          <option>An agency runs my ads now</option>
+        </select>
+      </div>
+      <div class="pf-field">
+        <label for="pfGoal">If the next 90 days went perfectly, what would change in your business?</label>
+        <textarea id="pfGoal" name="goal" rows="3" placeholder="Consistent booked calls, a full webinar, 10 new clients&hellip;"></textarea>
       </div>
       <div class="pf-field" id="pfEmailWrap">
         <label for="pfEmail">The email you booked with, so we can match this to your call.</label>
@@ -449,10 +468,16 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var topics = document.getElementById('pfTopics').value.trim();
-      var website = document.getElementById('pfWebsite').value.trim();
+      var val = function (id) { return document.getElementById(id).value.trim(); };
+      var answers = {
+        business: val('pfBusiness'),
+        website: val('pfWebsite'),
+        problem: val('pfProblem'),
+        ads: val('pfAds'),
+        goal: val('pfGoal'),
+      };
       var note = document.getElementById('pfNote');
-      if (!topics && !website) {
+      if (!answers.business && !answers.website && !answers.problem && !answers.ads && !answers.goal) {
         note.textContent = 'Add an answer to at least one question first.';
         return;
       }
@@ -461,17 +486,15 @@
       btn.textContent = 'Sending…';
       note.textContent = '';
 
+      answers.name = bookedName;
+      answers.email = emailInput.value.trim();
+      answers.callTime = params.get('event_start_time') || '';
+      answers.hp = document.getElementById('pfHp').value;
+
       fetch('/api/call-prep', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: bookedName,
-          email: emailInput.value.trim(),
-          callTime: params.get('event_start_time') || '',
-          topics: topics,
-          website: website,
-          hp: document.getElementById('pfHp').value,
-        }),
+        body: JSON.stringify(answers),
       }).then(function (r) {
         if (!r.ok) throw new Error('send failed');
         form.hidden = true;

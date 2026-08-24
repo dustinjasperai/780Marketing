@@ -33,17 +33,26 @@ module.exports = async function handler(req, res) {
   const name = clean(body.name, 150);
   const email = clean(body.email, 200);
   const callTime = clean(body.callTime, 120);
-  const topics = clean(body.topics);
+  // Assessment answers. Field set mirrors the discovery framework:
+  // situation (business, website, ads) -> problem -> desired outcome (goal).
+  const business = clean(body.business);
   const website = clean(body.website, 500);
+  const problem = clean(body.problem);
+  const ads = clean(body.ads, 120);
+  const goal = clean(body.goal);
+  // `topics` kept for any cached copy of the old single-question form.
+  const topics = clean(body.topics);
 
   // Nothing to relay — the form is optional, so an empty submit is a no-op.
-  if (!topics && !website) return res.status(400).json({ ok: false, error: 'empty' });
+  if (!business && !website && !problem && !ads && !goal && !topics) {
+    return res.status(400).json({ ok: false, error: 'empty' });
+  }
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.ALERT_EMAIL;
   if (!key || !to) {
     console.error('call-prep: RESEND_API_KEY / ALERT_EMAIL not set — answers dropped:',
-      name, email, topics.slice(0, 120));
+      name, email, (problem || topics).slice(0, 120));
     return res.status(500).json({ ok: false });
   }
 
@@ -51,11 +60,19 @@ module.exports = async function handler(req, res) {
     `Who: ${name || 'not given'} <${email || 'no email'}>`,
     `Call: ${callTime || 'time not passed'}`,
     '',
-    'What they want to cover:',
-    topics || '—',
+    'Business (what they sell, who for):',
+    business || '—',
     '',
-    'Business / website / funnels:',
+    'Website / funnels:',
     website || '—',
+    '',
+    'Main problem to solve:',
+    problem || topics || '—',
+    '',
+    `Paid ads history: ${ads || '—'}`,
+    '',
+    '90-day win:',
+    goal || '—',
   ];
 
   try {
