@@ -220,7 +220,7 @@
     <p>Your information will help us focus the call around your current goal for the business.</p>
     <form id="prepForm" class="prep-form" novalidate>
       <div class="pf-field">
-        <label for="pfBusiness">Tell us about your business — what do you sell, and who is it for?</label>
+        <label for="pfBusiness">Tell us about your business. What do you sell, and who is it for?</label>
         <textarea id="pfBusiness" name="business" rows="3" placeholder="Coaching program for dentists, $5k over 12 weeks&hellip;"></textarea>
       </div>
       <div class="pf-field">
@@ -236,8 +236,8 @@
         <select id="pfAds" name="ads">
           <option value="" selected>Choose one&hellip;</option>
           <option>Never run ads before</option>
-          <option>Ran ads before &mdash; didn't work out</option>
-          <option>Running ads now &mdash; want better results</option>
+          <option>Ran ads before, didn't work out</option>
+          <option>Running ads now, want better results</option>
           <option>An agency runs my ads now</option>
         </select>
       </div>
@@ -253,7 +253,7 @@
       <button type="submit" class="pf-btn" id="pfBtn">Send it over</button>
       <p class="pf-note" id="pfNote" role="status"></p>
     </form>
-    <p class="pf-done" id="pfDone" hidden>Got it — Dustin will read this before your call. See you there.</p>
+    <p class="pf-done" id="pfDone" hidden>Got it. Dustin will read this before your call. See you there.</p>
   </section>
 
   <!-- THE CALL -->
@@ -488,7 +488,7 @@
       }).catch(function () {
         btn.disabled = false;
         btn.textContent = 'Send it over';
-        note.textContent = "Couldn't send right now — no worries, you can reply to your confirmation email with this instead.";
+        note.textContent = "Couldn't send right now. No worries, you can reply to your confirmation email with this instead.";
       });
     });
   })();
